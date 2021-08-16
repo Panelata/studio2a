@@ -10,6 +10,8 @@
 ### Important Commands
 - Install Packages: composer install
 - Start up server: php -S 127.0.0.1:8000 -t public
+- Create new database migration: php artisan make:migration create_name_table
+- Run database migration scripts: php artisan migrate
 
 ## Setup DB Connection
 Update **DB_DATABASE**, **DB_USERNAME**, **DB_PASSWORD** to match your MYSQL Server
