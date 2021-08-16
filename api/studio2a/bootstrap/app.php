@@ -27,6 +27,7 @@ $app->withFacades();
 
 $app->withEloquent();
 $app->configure('logging');
+$app->configure('database');
 
 /*
 |--------------------------------------------------------------------------
