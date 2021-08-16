@@ -2,6 +2,8 @@
 - Pull from the latest develop branch before development
 - After completion of development, create a pull request to merge your branch into the develop branch
 - Pull request will be required to be reviewed by one other developer and approved before merging 
+- When creating a new branch, follow the sturcture "initials-branchName" | E.g. "hl-newBranch"
+
 
 # Development
 ## API Server
