@@ -2,6 +2,7 @@
 
 return [
     'default' => 'studio2a',
+    'migrations' => 'migrations',
     'connections' => [
         'studio2a' => [
             'driver' => 'mysql',
