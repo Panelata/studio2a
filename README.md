@@ -15,6 +15,14 @@
 - Create new database migration: php artisan make:migration create_name_table
 - Run database migration scripts: php artisan migrate
 
+## FrontEnd Server
+**Path:** Studio2A/studio-2a
+
+### Important Commands
+- Install Packages: npm install
+- Start up server: npm start
+- Close server: ctrl+c
+
 ## Setup DB Connection
 Update **DB_DATABASE**, **DB_USERNAME**, **DB_PASSWORD** to match your MYSQL Server
 
@@ -60,11 +68,3 @@ CACHE_DRIVER=file
 QUEUE_CONNECTION=sync
   
 </sub>
-
-## FrontEnd Server
-**Path:** Studio2A/studio-2a
-
-### Important Commands
-- Install Packages: npm install
-- Start up server: npm start
-- Close server: ctrl+c
