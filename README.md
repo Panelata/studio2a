@@ -1,73 +1,68 @@
-# Getting Started with Create React App
+# Git
+- Pull from the latest develop branch before development
+- After completion of development, create a pull request to merge your branch into the develop branch
+- Pull request will be required to be reviewed by one other developer and approved before merging 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Development
+## API Server
+**Path:** Studio2A/studio-2a/api/studio2a
 
-## Available Scripts
+### Important Commands
+- Install Packages: composer install
+- Start up server: php -S 127.0.0.1:8000 -t public
+- Create new database migration: php artisan make:migration create_name_table
+- Run database migration scripts: php artisan migrate
 
-In the project directory, you can run:
+## Setup DB Connection
+Update **DB_DATABASE**, **DB_USERNAME**, **DB_PASSWORD** to match your MYSQL Server
 
-### `npm install`
-Install clean packages from package.json
+**Example .env**
 
-### `npm start`
+<sub>
+APP_NAME=Lumen
+  
+APP_ENV=local
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+APP_KEY=
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+APP_DEBUG=true
 
-### `npm test`
+APP_URL=http://localhost
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+APP_TIMEZONE=UTC
 
-### `npm run build`
+<br/>
+  
+LOG_CHANNEL=stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+LOG_SLACK_WEBHOOK_URL=
+  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br/>
+  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+DB_CONNECTION=mysql
 
-### `npm run eject`
+DB_HOST=127.0.0.1
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+DB_PORT=3306
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+DB_DATABASE=studio2a
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+DB_USERNAME=root
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+DB_PASSWORD="studio2a"
 
-## Learn More
+CACHE_DRIVER=file
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+QUEUE_CONNECTION=sync
+  
+</sub>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## FrontEnd Server
+**Path:** Studio2A/studio-2a
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Important Commands
+- Install Packages: npm install
+- Start up server: npm start
+- Close server: ctrl+c
