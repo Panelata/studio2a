@@ -1,3 +1,19 @@
+# Git
+Pull from the latest develop branch before development
+
+# File Paths for starting up server
+## API Server
+Studio2A/studio-2a/api/studio2a
+
+Command to start up server: php -S 127.0.0.1:8000 -t public
+
+## FrontEnd Server
+Studio2A/studio-2a
+
+Command to start up server: npm start
+
+------------------------------------------------------------
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
