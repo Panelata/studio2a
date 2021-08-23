@@ -10,10 +10,21 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
+    /*
+        Body Request
+        {
+            "firstName": "Henry",
+            "lastName": "Luu",
+            "email": "email@email.com",
+            "username": "HenryL",
+            "password": "password123",
+            "userType": "student"
+        }
+    */
     public function register(Request $request){
         $bodyContent = json_decode($request->getContent(), true);
 
-        //Checks if username already exists
+        //Returns error if duplicate username
         $exist = User::where('username', '=', $bodyContent['username'])->first();
         if($exist){
             $response['success'] = false;
@@ -37,7 +48,39 @@ class LoginController extends Controller
         return response()->json($response, $response['status']);
     }
 
+    /*
+        Body Request
+        {
+            "username": "HenryL",
+            "password": "password123"
+        }
+    */
     public function login(Request $request){
-        Log::debug("Hit Login");
+        $bodyContent = json_decode($request->getContent(), true);
+        Log::debug($bodyContent);
+
+        //Get user record
+        $user = User::where('username', '=', $bodyContent['username'])->first();
+
+        //Return error if no username is found
+        if(!$user){
+            $response['message'] = 'No account found';
+            $response['success' ] = false;
+            $response['status'] = 401;
+            return response()->json($response, $response['status']);
+        }
+
+        //Returns error if password does not match
+        if(!Hash::check($bodyContent['password'], $user->password)){
+            $response['message'] = 'Incorrect password';
+            $response['success'] = false;
+            $response['status'] = 401;
+            return response()->json($response, $response['status']);
+        }
+
+        //Returns successful login 
+        $response['success'] = true;
+        $response['status'] = 200;
+        return response()->json($response, $response['status']);
     }
 }
