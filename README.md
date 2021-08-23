@@ -1,8 +1,8 @@
 # Git
-- Pull from the latest develop branch before development
+- Pull from the latest develop branch before development `git pull develop`
 - After completion of development, create a pull request to merge your branch into the develop branch
 - Pull request will be required to be reviewed by one other developer and approved before merging 
-- When creating a new branch, follow the sturcture "initials-branchName" | E.g. "hl-newBranch"
+- When creating a new branch, follow the sturcture "initials-branchName" | E.g. `git checkout -b hl-newBranch`
 
 
 # Development
@@ -12,15 +12,15 @@
 ### Important Commands
 - Install Packages: composer install
 - Start up server: php -S 127.0.0.1:8000 -t public
-- Create new database migration: php artisan make:migration create_name_table
-- Run database migration scripts: php artisan migrate
+- Create new database migration: `php artisan make:migration create_name_table`
+- Run database migration scripts: `php artisan migrate`
 
 ## FrontEnd Server
 **Path:** Studio2A/studio-2a
 
 ### Important Commands
-- Install Packages: npm install
-- Start up server: npm start
+- Install Packages: `npm install`
+- Start up server: `npm start`
 - Close server: ctrl+c
 
 ## Setup DB Connection
