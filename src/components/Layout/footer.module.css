@@ -1,0 +1,7 @@
+.footerContainer {
+	position: relative;
+	height: 100px;
+	background-color: aliceblue;
+	width: 100%;
+	margin-top: auto;
+}
