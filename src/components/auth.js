@@ -1,6 +1,7 @@
 class Auth{
     constructor(){
         this.authenticated = false;
+        this.userType = '';
     }
 
     //Handles Login
@@ -17,14 +18,24 @@ class Auth{
         })
         .then(data =>{
             if(data.success){
+                this.authenticated = true;
+                this.userType = data.userType;
                 cb(true);
             } else {
+                this.authenticated = false;
+                this.userType = '';
                 cb(false);
             }
         });
     }
 
-    //Is authenticated
+
+    //Returns user type
+    getUserType(){
+        return this.userType;
+    }
+
+    //Returns authenticated state
     isAuthenticated(){
         return this.authenticated;
     }

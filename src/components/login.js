@@ -1,7 +1,7 @@
 import React from 'react';
 import auth from './auth';
 
-const Login = () => {
+const Login = props => {
 	const [username, setUsername] = React.useState('');
 	const [password, setPassword] = React.useState('');
 
@@ -11,6 +11,7 @@ const Login = () => {
 			//If success authenticated redirect user to homepage
 			if(success){
 				console.log("Success");
+				props.checkLogin();
 			} else {
 				console.log("Unsuccessful");
 			}
