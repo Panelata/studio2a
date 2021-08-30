@@ -57,7 +57,6 @@ class LoginController extends Controller
     */
     public function login(Request $request){
         $bodyContent = json_decode($request->getContent(), true);
-        Log::debug($bodyContent);
 
         //Get user record
         $user = User::where('username', '=', $bodyContent['username'])->first();
@@ -79,6 +78,7 @@ class LoginController extends Controller
         }
 
         //Returns successful login 
+        $response['userType'] = $user->userType;
         $response['success'] = true;
         $response['status'] = 200;
         return response()->json($response, $response['status']);
