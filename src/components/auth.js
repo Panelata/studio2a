@@ -5,14 +5,22 @@ class Auth{
 
     //Handles Login
     login(login, cb){
-        console.log("Logging in user");
-        console.log(login);
         fetch('http://127.0.0.1:8000/login', {
             method: 'POST',
             body: JSON.stringify({
                 username: login[0],
                 password: login[1]
             })
+        })
+        .then(response =>{
+            return response.json();
+        })
+        .then(data =>{
+            if(data.success){
+                cb(true);
+            } else {
+                cb(false);
+            }
         });
     }
 

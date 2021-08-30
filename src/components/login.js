@@ -7,10 +7,13 @@ const Login = () => {
 
 	const login = (ev) =>{
 		ev.preventDefault();
-		auth.login([username, password], (response)=>{
+		auth.login([username, password], (success)=>{
 			//If success authenticated redirect user to homepage
-
-			//If fail authenticated return error message
+			if(success){
+				console.log("Success");
+			} else {
+				console.log("Unsuccessful");
+			}
 		});
 	}
 
