@@ -1,16 +1,18 @@
 import './App.css';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import Home from './components/home';
-import NewAssignment from './components/newAssignment';
-import StudentEntry from './components/studentEntry';
+import Login from './Components/login';
+import Home from './Components/home';
+import NewAssignment from './Components/newAssignment';
+import StudentEntry from './Components/studentEntry';
 
-import Layout from './components/Layout';
+import Layout from './Components/Layout';
 
 function App() {
   return (
     <div className="App">
       <Switch>
         {/* Declare page routes here */}
+        <RouteWrapper path='/login' exact component={Login} layout={Layout} />
         <RouteWrapper path='/home' exact component={Home} layout={Layout} />
         <RouteWrapper path='/new-task' component={NewAssignment} layout={Layout} />
         <RouteWrapper path='/join-task' component={StudentEntry} layout={Layout} />
