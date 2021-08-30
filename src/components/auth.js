@@ -1,3 +1,8 @@
+/*
+    TODO
+    Create the ability to retain user login state in local storage
+*/
+
 class Auth{
     constructor(){
         this.authenticated = false;
