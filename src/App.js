@@ -1,13 +1,13 @@
 import './App.css';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import Login from './Components/login';
-import Home from './Components/home';
-import NewAssignment from './Components/newAssignment';
-import StudentEntry from './Components/studentEntry';
+import Login from './components/login';
+import Home from './components/home';
+import NewAssignment from './components/newAssignment';
+import StudentEntry from './components/studentEntry';
 
-import Layout from './Components/Layout';
-import auth from './Components/auth';
+import Layout from './components/Layout';
+import auth from './components/auth';
 import React from 'react';
 
 function App() {
