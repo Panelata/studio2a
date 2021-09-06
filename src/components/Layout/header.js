@@ -5,22 +5,23 @@ import auth from '../auth';
 
 const Header = () => {
 	const [authenticated, setAuthenticated] = React.useState(false);
-	React.useEffect(()=>{
+	React.useEffect(() => {
 		setAuthenticated(auth.isAuthenticated());
 	}, []);
 
 	return (
 		<div>
 			{authenticated ?
-			<div className={styles.headerContainer}>
-				<NavLink to="/home">Home</NavLink>
-				<NavLink to="/new-task">Create a New Assignment</NavLink>
-				<NavLink to="/join-task">Add your details for an Assignment</NavLink>
-			</div>
-			:
-			<div>
-				<NavLink to="/login">Login</NavLink>
-			</div>
+				<div className={styles.headerContainer}>
+					<NavLink to="/admin-home">Admin Homepage</NavLink>
+					<NavLink to="/new-task">Create a New Assignment</NavLink>
+					<NavLink to="/join-task">Add your details for an Assignment</NavLink>
+					<NavLink to="/student-home">Student Homepage</NavLink>
+				</div>
+				:
+				<div>
+					<NavLink to="/login">Login</NavLink>
+				</div>
 			}
 		</div>
 	)
