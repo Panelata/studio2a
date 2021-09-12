@@ -1,0 +1,12 @@
+.options {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	width: 100vw;
+	max-width: 100%;
+	justify-content: space-around;	
+}
+
+.column{
+
+}

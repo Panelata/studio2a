@@ -6,6 +6,7 @@ import AdminHome from './components/adminHome';
 import NewAssignment from './components/newAssignment';
 import StudentEntry from './components/studentEntry';
 import StudentHome from './components/studentHome';
+import StudentClass from './components/studentClass';
 import Layout from './components/Layout';
 import auth from './components/auth';
 import React from 'react';
@@ -31,6 +32,7 @@ function App() {
           <RouteWrapper path='/new-task' component={NewAssignment} layout={Layout} />
           <RouteWrapper path='/join-task' component={StudentEntry} layout={Layout} />
           <RouteWrapper path='/student-home' component={StudentHome} layout={Layout} />
+          <RouteWrapper path='/student/class' component={StudentClass} layout={Layout} />
           {/* If the route doesn't exist, default to /home */}
           <Redirect to='/admin-home' />
         </Switch>
