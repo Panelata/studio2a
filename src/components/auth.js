@@ -23,7 +23,7 @@ class Auth{
         })
         .then(data =>{
             if(data.success){
-                this.authenticated = false;
+                this.authenticated = true;
                 this.userType = data.userType;
                 cb(true);
             } else {
