@@ -5,7 +5,7 @@
 
 class Auth{
     constructor(){
-        this.authenticated = false;
+        this.authenticated = true;
         this.userType = '';
     }
 
@@ -30,6 +30,7 @@ class Auth{
                 this.authenticated = false;
                 this.userType = '';
                 cb(false);
+               
             }
         });
     }
