@@ -6,15 +6,15 @@ import { Link } from 'react-router-dom';
 const classes = [
 	{
 		id: "01231234",
-		name: "class_1"
+		name: "Software Engineering Studio 1a"
 	},
 	{
 		id: "89786231",
-		name: "class_2"
+		name: "Data Structures and Algorithms"
 	},
 	{
 		id: "89712121",
-		name: "class_3"
+		name: "Engineering Communication"
 	}
 ];
 
