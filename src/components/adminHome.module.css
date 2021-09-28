@@ -1,0 +1,32 @@
+.tableofSubjects {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    
+  }
+
+  .divPositioning {
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top: 30px;
+  }
+
+  td, th {
+    border: 1px solid black;
+    text-align: center;
+    padding: 8px;
+  }
+
+  .theButton {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-top: 30px;
+  }

@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import Login from './components/login';
+import Login from './components/Login/login';
 import AdminHome from './components/adminHome';
 import NewAssignment from './components/newAssignment';
 import StudentEntry from './components/studentEntry';
