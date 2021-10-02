@@ -30,6 +30,7 @@ class Auth{
                 this.authenticated = false;
                 this.userType = '';
                 cb(false);
+               
             }
         });
     }
