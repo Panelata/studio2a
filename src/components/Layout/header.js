@@ -13,6 +13,7 @@ const Header = () => {
 		<div>
 			{authenticated ?
 				<div className={styles.headerContainer}>
+					<NavLink to="/admin/register">Register User</NavLink>
 					<NavLink to="/admin-home">Admin Homepage</NavLink>
 					<NavLink to="/new-task">Create a New Assignment</NavLink>
 					<NavLink to="/join-task">Add your details for an Assignment</NavLink>
