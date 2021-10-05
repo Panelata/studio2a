@@ -11,6 +11,10 @@
     padding-top: 30px;
   }
 
+  .PageDiv {
+    overflow: scroll;
+  }
+
   td, th {
     border: 1px solid black;
     text-align: center;
@@ -30,3 +34,47 @@
     cursor: pointer;
     margin-top: 30px;
   }
+
+  .boxcontainer {
+    width: 500px;
+    height: 450px;
+    margin: 20px auto;
+    margin-top: 35px;
+    position: relative;
+  }
+
+  .box1, .box2, .box3, .box4 {
+    background-color: lightblue;
+    width: 200px;
+    height: 180px;
+    border-radius: 10px;
+    padding: 40px;
+    padding-top: 60px;
+    font-weight: bold;
+    font-size: large;
+  }
+
+  .box1 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
+  .box2 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+  
+  .box3 {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+  }
+
+  .box4 {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+  }
+

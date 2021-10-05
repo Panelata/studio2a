@@ -9,19 +9,13 @@ const AdminHome = () => {
 			<div> 
 			<button type="button" className={styles.theButton}>Notifications </button>
 			</div>
-			<div className={styles.divPositioning}>
-				<table className={styles.tableofSubjects}> 
-					<tbody>
-						<tr> 
-							<th> Subject </th>
-						</tr>
-						<tr><td> Subject 1</td></tr>
-						<tr><td> Subject 2</td></tr>
-						<tr><td> Subject 3</td></tr>
-						<tr><td> Subject 4</td></tr>
-					</tbody>
-				</table>
+			
 
+			<div className={styles.boxcontainer}>
+					<div className={styles.box1}> Subject A </div>
+					<div className={styles.box2}> Subject B </div>
+					<div className={styles.box3}> Subject C </div>
+					<div className={styles.box4}> Subject D </div>
 			</div>
 			
 
