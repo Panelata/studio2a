@@ -23,15 +23,15 @@ class LoginController extends Controller
     */
     public function register(Request $request){
         $bodyContent = json_decode($request->getContent(), true);
-
+        Log::debug($bodyContent);
         //Returns error if duplicate username
-        $exist = User::where('username', '=', $bodyContent['username'])->first();
-        if($exist){
-            $response['success'] = false;
-            $response['status'] = 400;
-            $response['message'] = 'Duplicate username';
-            return response()->json($response, $response['status']);
-        }
+        //$exist = User::where('username', '=', $bodyContent['username'])->first();
+        //if($exist){
+        //     $response['success'] = false;
+        //     $response['status'] = 400;
+        //     $response['message'] = 'Duplicate username';
+        //     return response()->json($response, $response['status']);
+        // }
 
         //Creates new user
         $user = new User;
