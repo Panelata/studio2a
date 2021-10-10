@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Models\SessionToken;
 
 class LoginController extends Controller
 {
@@ -57,7 +58,7 @@ class LoginController extends Controller
     */
     public function login(Request $request){
         $bodyContent = json_decode($request->getContent(), true);
-
+        
         //Get user record
         $user = User::where('username', '=', $bodyContent['username'])->first();
 
@@ -77,8 +78,25 @@ class LoginController extends Controller
             return response()->json($response, $response['status']);
         }
 
+        //Expires all previous tokens
+        SessionToken::where('userID', '=', $user->userID)
+        ->where('expired', '=', 0)
+        ->update([
+            'expired' => 1
+        ]);
+
+        //Creates session token
+        $today = date('H:i:s d-m-Y');
+        $token = new SessionToken;
+        $token->userID = $user->userID;
+        $token->token = uniqid(rand()) . uniqid();
+        $token->expired = '0';
+        $token->expiryDateTime = date('H:i:s d-m-Y', strtotime($today . ' + 7 days'));
+        $token->save();
+
         //Returns successful login 
         $response['userType'] = $user->userType;
+        $response['token'] = $token->token;
         $response['success'] = true;
         $response['status'] = 200;
         return response()->json($response, $response['status']);

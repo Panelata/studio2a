@@ -6,10 +6,11 @@ import './loginStyle.css'
 const Login = props => {
 	const [username, setUsername] = React.useState('');
 	const [password, setPassword] = React.useState('');
+	const [keepSignin, setKeepSignin] = React.useState(false);
 
 	const login = (ev) =>{
 		ev.preventDefault();
-		auth.login([username, password], (success)=>{
+		auth.login([username, password, keepSignin], (success)=>{
 			//If success authenticated redirect user to homepage
 			if(success){
 				console.log("Success");
@@ -28,6 +29,7 @@ const Login = props => {
 				<input required type="text" onChange={(ev)=>setUsername(ev.target.value)} />
 				<label>Password</label>
 				<input required type="password" onChange={(ev)=>setPassword(ev.target.value)} />
+				<label><input type="checkbox" onChange={()=>setKeepSignin(!keepSignin)} /> Keep me signed in</label>
 				<button type="submit" className="btn btn-primary btn-block btn-large">Log In</button>
 			</form>
 		</div>

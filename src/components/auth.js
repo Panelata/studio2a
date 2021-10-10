@@ -25,6 +25,9 @@ class Auth{
             if(data.success){
                 this.authenticated = true;
                 this.userType = data.userType;
+                if(login[2]){
+                    console.log("Storing session token to retain login status");
+                }
                 cb(true);
             } else {
                 this.authenticated = false;
