@@ -3,26 +3,44 @@ import { NavLink } from 'react-router-dom';
 import styles from './header.module.css';
 import auth from '../auth';
 
+
+const renderAdminHeader = () => {
+	return (
+		<div className={styles.headerContainer}>
+			<NavLink to="/admin-home">View all Classes</NavLink>
+			<NavLink to="/new-task">Create a New Assignment</NavLink>
+			<NavLink to="/admin/register">Register a student</NavLink>
+		</div>
+	)
+}
+
+const renderStudentHeader = () => {
+	return (
+		<div className={styles.headerContainer}>
+			<NavLink to="/student-home">View your classes</NavLink>
+		</div>
+	)
+}
+
 const Header = () => {
 	const [authenticated, setAuthenticated] = React.useState(false);
+	const [userType, setUserType] = React.useState("");
+
 	React.useEffect(() => {
 		setAuthenticated(auth.isAuthenticated());
+		setUserType(auth.getUserType());
 	}, []);
 
 	return (
 		<div>
 			{authenticated ?
-				<div className={styles.headerContainer}>
-					<NavLink to="/admin/register">Register User</NavLink>
-					<NavLink to="/admin-home">Admin Homepage</NavLink>
-					<NavLink to="/new-task">Create a New Assignment</NavLink>
-					<NavLink to="/join-task">Add your details for an Assignment</NavLink>
-					<NavLink to="/student-home">Student Homepage</NavLink>
-				</div>
+				<>
+					You are logged in as a {userType}
+					{(userType === "student" && renderStudentHeader()) || (userType === "admin" && renderAdminHeader())}
+				</>
 				:
-				<div>
-					<NavLink to="/login">Login</NavLink>
-				</div>
+				<>
+				</>
 			}
 		</div>
 	)
