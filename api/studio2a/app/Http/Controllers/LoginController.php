@@ -58,7 +58,7 @@ class LoginController extends Controller
     */
     public function login(Request $request){
         $bodyContent = json_decode($request->getContent(), true);
-        
+
         //Get user record
         $user = User::where('username', '=', $bodyContent['username'])->first();
 
@@ -100,5 +100,40 @@ class LoginController extends Controller
         $response['success'] = true;
         $response['status'] = 200;
         return response()->json($response, $response['status']);
+    }
+
+    public function checkToken(Request $request){
+        $bodyContent = json_decode($request->getContent(), true);
+
+        //Checks if the token exist and if it has expired yet
+        $today = strtotime(date('H:i:s d-m-Y'));
+
+        //If no token is returned, then token is expired
+        $token = SessionToken::where('token', '=', $bodyContent['token'])->where('expired', '=', '0')->first();
+        if(!$token){
+            $response['status'] = 200;
+            $response['success'] = false;
+            return response()->json($response, 200);
+        }
+
+        $tokenTime = strtotime($token->expiryDateTime);
+
+        if($today > $tokenTime){
+            //Token is expired, setting the expired value to 1
+            SessionToken::where('id', '=', $token->id)
+            ->update([
+                'expired' => 1
+            ]);
+            $response['status'] = 200;
+            $response['success'] = false;
+            return response()->json($response, 200);
+        } else {
+            //Token is still good, logging in user
+            $user = User::where('userID', '=', $token->userID)->first();
+            $response['userType'] = $user->userType;
+            $response['status'] = 200;
+            $response['success'] = true;
+            return response()->json($response, 200);
+        }
     }
 }

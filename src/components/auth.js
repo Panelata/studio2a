@@ -6,7 +6,7 @@
 class Auth{
     constructor(){
         this.authenticated = false;
-        this.userType = '';
+        this.userType = '';  
     }
 
     //Handles Login
@@ -25,8 +25,9 @@ class Auth{
             if(data.success){
                 this.authenticated = true;
                 this.userType = data.userType;
+                sessionStorage.setItem('sessionToken', data.token);
                 if(login[2]){
-                    console.log("Storing session token to retain login status");
+                    localStorage.setItem('token', data.token);
                 }
                 cb(true);
             } else {
@@ -71,6 +72,12 @@ class Auth{
     //Returns authenticated state
     isAuthenticated(){
         return this.authenticated;
+    }
+
+    //Token authenticated
+    tokenAuthenticated(userType){
+        this.authenticated = true;
+        this.userType = userType;
     }
 }
 

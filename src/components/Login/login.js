@@ -8,6 +8,30 @@ const Login = props => {
 	const [password, setPassword] = React.useState('');
 	const [keepSignin, setKeepSignin] = React.useState(false);
 
+	React.useEffect(()=>{
+		if(localStorage.getItem('token') !== null){
+            fetch('http://127.0.0.1:8000/login/token', {
+            method: 'POST',
+            body: JSON.stringify({
+                token: localStorage.getItem('token')
+                })
+            })
+            .then(resp =>{
+                return resp.json()
+            })
+            .then(data =>{
+                console.log(data);
+                if(data.success){
+                    sessionStorage.setItem('token', localStorage.getItem('token'));
+                    auth.tokenAuthenticated(data.userType);
+					props.checkLogin();
+                } else {
+                    localStorage.removeItem('token');
+                }
+            });
+        }
+	})
+
 	const login = (ev) =>{
 		ev.preventDefault();
 		auth.login([username, password, keepSignin], (success)=>{
