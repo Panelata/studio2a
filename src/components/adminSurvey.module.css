@@ -1,0 +1,74 @@
+.row {
+    margin-left:-5px;
+    margin-right:-5px;
+  }
+    
+  .column {
+    float: left;
+    width: 50%;
+    padding: 5px;
+  }
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .TopTwoTables {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+    width: 70%;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .SkillsTable {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 60%;
+    border: 1px solid black;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    
+  }
+
+  tr, td {
+      border: 1px solid black;
+  }
+
+  th, td {
+    padding: 16px;
+  }
+
+  .AddSkillButton {
+    background-color: white; 
+    border: 2px solid gray;
+    border-radius: 10px;
+    color: black;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .UploadSurveyButton {
+    background-color: white; 
+    border: 2px solid gray;
+    border-radius: 10px;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
