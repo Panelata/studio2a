@@ -1,0 +1,76 @@
+//To save time lets just hard code the skills
+
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+ const AdminProject = (props) => {
+    const history = useHistory();
+    const [projectName, setProjectName] = React.useState('');
+    const [size, setSize] = React.useState('');
+    const [skills, setSkills] = React.useState([]);
+    
+    React.useEffect(()=>{
+        console.log(props);
+    },[]);
+
+    const addSkill = (value) =>{
+        setSkills(skills => [...skills, value]);
+    }
+
+    const removeSkill = (skill) => {
+        setSkills(skills.filter(item => item !== skill));
+    }
+
+    const uploadSurvey = () => {
+        console.log(skills);
+        console.log(projectName);
+        console.log(size);
+
+        fetch('http://127.0.0.1:8000/survey', {
+            method: 'POST', 
+            body: JSON.stringify({
+                projectName: projectName,
+                size: size,
+                skills: skills
+            })
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(data =>{
+            if(data.success){
+                console.log("Successfully created new project...Redirecting");
+                history.push("/");
+            }
+        });
+    }
+
+     return (
+         <div>
+            <p>{props.location.subjectName} > Create Project</p>
+            <label>Project Name</label>
+            <input type="text" onChange={(ev)=>setProjectName(ev.target.value)} />
+            <label>Group Size</label>
+            <input type="number" onChange={(ev)=>setSize(ev.target.value)} />
+            {
+                skills.map((skill, key) => 
+                    <div key={key}>
+                      <p>{skill}</p>
+                      <button onClick={()=>{removeSkill(skill)}}>Remove</button>
+                    </div>
+                )
+            }
+            <label>Add Skill</label>
+            <select onChange={(ev)=>addSkill(ev.target.value)}>
+                    <option hidden>Select Skill</option>
+                    <option>Skill 1</option>
+                    <option>Skill 2</option>
+                    <option>Skill 3</option>
+                    <option>Skill 4</option>
+            </select> 
+            <button onClick={uploadSurvey}>Upload Survey</button>
+         </div>
+     )
+ }
+
+ export default AdminProject;
