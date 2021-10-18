@@ -64,6 +64,13 @@ class Auth{
         })
     }
 
+    logout(){
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        this.authenticated = false;
+        this.userType = false;
+    }
+
     //Returns user type
     getUserType(){
         return this.userType;
