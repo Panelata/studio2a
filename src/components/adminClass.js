@@ -1,24 +1,24 @@
 import React from 'react';
-import styles from "./newAssignments.module.css"
+import styles from "./adminClass.module.css"
 
-const NewAssignment = () => {
+const AdminClass = (props) => {
+	const { subjectName } = props.location;
 	return (
 		<div>
 			<div>
 				<h2>
-					Subject A
+					{subjectName}
 				</h2>
 				<br></br><br></br>
 			</div>
 
 			<div className={styles.boxcontainer}>
 					<div className={styles.box1}> Create Project </div>
-					<div className={styles.box2}> Manage Project </div>
-
+					<div className={styles.box2}> Manage Groups </div>
 			</div>
 
 		</div>
 	)
 }
 
-export default NewAssignment;
+export default AdminClass;
