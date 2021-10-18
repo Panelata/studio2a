@@ -14,7 +14,7 @@ const AdminClass = (props) => {
 
 			<div className={styles.boxcontainer}>
 					<div className={styles.box1}> Create Project </div>
-					<div className={styles.box2}> Manage Project </div>
+					<div className={styles.box2}> Manage Groups </div>
 			</div>
 
 		</div>
