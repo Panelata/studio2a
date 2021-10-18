@@ -1,9 +1,22 @@
 import React from 'react';
+import styles from "./newAssignments.module.css"
 
 const NewAssignment = () => {
 	return (
 		<div>
-			<h1>Create a new Assignment for your class: </h1>
+			<div>
+				<h2>
+					Subject A
+				</h2>
+				<br></br><br></br>
+			</div>
+
+			<div className={styles.boxcontainer}>
+					<div className={styles.box1}> Create Project </div>
+					<div className={styles.box2}> Manage Project </div>
+
+			</div>
+
 		</div>
 	)
 }
