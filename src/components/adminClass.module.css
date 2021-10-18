@@ -1,0 +1,70 @@
+.tableofSubjects {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  
+}
+
+.divPositioning {
+  padding-left: 200px;
+  padding-right: 200px;
+  padding-top: 30px;
+}
+
+.PageDiv {
+  overflow: scroll;
+}
+
+td, th {
+  border: 1px solid black;
+  text-align: center;
+  padding: 8px;
+}
+
+.theButton {
+  background-color: #8c92e9;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.boxcontainer {
+  width: 500px;
+  height: 450px;
+  margin: 20px auto;
+  margin-top: 35px;
+  position: relative;
+}
+
+.box1, .box2, .box3, .box4 {
+  background-color: rgb(197, 163, 131);
+  width: 200px;
+  height: 180px;
+  border-radius: 10px;
+  padding: 40px;
+  padding-top: 60px;
+  font-weight: bold;
+  font-size: large;
+}
+
+.box1 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.box2 {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+
+
