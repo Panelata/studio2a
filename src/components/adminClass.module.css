@@ -1,43 +1,70 @@
-.options {
-	display: flex;
-	flex-direction: row;
-	gap: 20px;
-	width: 100vw;
-	max-width: 100%;
-	padding: 40px;
-	justify-content: center;
+.tableofSubjects {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  
 }
 
-.column {
-	min-height: 500px;
-	width: max-content;
-	min-width: 40%;
-	display: flex;
-	flex-direction: column;
-	align-content: center;
-	justify-content: center;
-	align-items: center;
-	gap: 30px;
+.divPositioning {
+  padding-left: 200px;
+  padding-right: 200px;
+  padding-top: 30px;
 }
 
-button:disabled {
-	cursor: not-allowed;
-	pointer-events: all !important;
-	box-shadow: none;
-	background-color: grey;
-	border: 1px solid grey;
+.PageDiv {
+  overflow: scroll;
 }
 
-.btn {
-	background-color: #4a77d4;
-	color: white;
-	padding: 14px 28px;
-	font-size: 20px;
-	cursor: pointer;
-	border-radius: 20px;
-	max-width: 400px;
-	width: 100%;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5);
-	border: 1px solid #3762bc;
-	padding: 2em;
+td, th {
+  border: 1px solid black;
+  text-align: center;
+  padding: 8px;
 }
+
+.theButton {
+  background-color: #8c92e9;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.boxcontainer {
+  width: 500px;
+  height: 450px;
+  margin: 20px auto;
+  margin-top: 35px;
+  position: relative;
+}
+
+.box1, .box2, .box3, .box4 {
+  background-color: rgb(197, 163, 131);
+  width: 200px;
+  height: 180px;
+  border-radius: 10px;
+  padding: 40px;
+  padding-top: 60px;
+  font-weight: bold;
+  font-size: large;
+}
+
+.box1 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.box2 {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+
+

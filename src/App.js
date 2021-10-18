@@ -3,7 +3,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 
 import Login from './components/Login/login';
 import AdminHome from './components/adminHome';
-import NewAssignment from './components/newAssignment';
+import AdminClass from './components/adminClass';
 import StudentEntry from './components/studentEntry';
 import StudentHome from './components/studentHome';
 import Register from './components/register';
@@ -44,7 +44,6 @@ function App() {
             {/* Declare Admin routes here */}
             < RouteWrapper path='/admin-home' exact component={AdminHome} layout={Layout} />
             <RouteWrapper path='/admin/register' exact component={Register} layout={Layout} />
-            <RouteWrapper path='/new-task' component={NewAssignment} layout={Layout} />
             <RouteWrapper path='/admin/class' component={AdminClass} layout={Layout} />
             {/* If the route doesn't exist, default to /home */}
             <Redirect to='/admin-home' />
