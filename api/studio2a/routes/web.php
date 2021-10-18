@@ -22,3 +22,4 @@ $router->get('test', 'TestController@test');
 //Login endpoints
 $router->post('register', 'LoginController@register');
 $router->post('login', 'LoginController@login');
+$router->post('login/token', 'LoginController@checkToken');
