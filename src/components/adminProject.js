@@ -1,7 +1,10 @@
 //To save time lets just hard code the skills
 
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
  const AdminProject = (props) => {
+    const history = useHistory();
     const [projectName, setProjectName] = React.useState('');
     const [size, setSize] = React.useState('');
     const [skills, setSkills] = React.useState([]);
@@ -32,8 +35,14 @@ import React from 'react';
             })
         })
         .then(response => {
-            console.log("test");
+            return response.json();
         })
+        .then(data =>{
+            if(data.success){
+                console.log("Successfully created new project...Redirecting");
+                history.push("/");
+            }
+        });
     }
 
      return (
