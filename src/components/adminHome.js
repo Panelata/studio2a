@@ -14,7 +14,8 @@ const AdminHome = () => {
 			<div className={styles.boxcontainer}>
 				<div className={styles.box1}> <Link to={{
 					pathname: "/admin/class",
-					subjectName: "Software Engineering Studio 1a"
+					subjectName: "Software Engineering Studio 1a",
+					subjectID: 1
 				}}>Software Engineering Studio 1a</Link></div>
 				<div className={styles.box2}>
 					<Link to={{

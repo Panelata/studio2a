@@ -8,6 +8,7 @@ import StudentEntry from './components/studentEntry';
 import StudentHome from './components/studentHome';
 import Register from './components/register';
 import StudentClass from './components/studentClass';
+import AdminProject from './components/adminProject';
 import Layout from './components/Layout';
 import auth from './components/auth';
 import React from 'react';
@@ -43,6 +44,7 @@ function App() {
             {/* Declare Admin routes here */}
             < RouteWrapper path='/admin-home' exact component={AdminHome} layout={Layout} />
             <RouteWrapper path='/admin/register' exact component={Register} layout={Layout} />
+            <RouteWrapper path='/admin/class/project' component={AdminProject} layout={Layout} />
             <RouteWrapper path='/admin/class' component={AdminClass} layout={Layout} />
             {/* If the route doesn't exist, default to /home */}
             <Redirect to='/admin-home' />
