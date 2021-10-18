@@ -5,6 +5,7 @@ import Login from './components/Login/login';
 import AdminHome from './components/adminHome';
 import AdminSurvey from './components/adminSurvey';
 import NewAssignment from './components/newAssignment';
+import AdminClass from './components/adminClass';
 import StudentEntry from './components/studentEntry';
 import StudentHome from './components/studentHome';
 import Register from './components/register';
@@ -45,7 +46,7 @@ function App() {
             < RouteWrapper path='/admin-home' exact component={AdminHome} layout={Layout} />
             < RouteWrapper path='/admin-survey' exact component={AdminSurvey} layout={Layout} />
             <RouteWrapper path='/admin/register' exact component={Register} layout={Layout} />
-            <RouteWrapper path='/new-task' component={NewAssignment} layout={Layout} />
+            <RouteWrapper path='/admin/class' component={AdminClass} layout={Layout} />
             {/* If the route doesn't exist, default to /home */}
             <Redirect to='/admin-home' />
           </Switch>

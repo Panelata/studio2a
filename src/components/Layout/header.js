@@ -8,7 +8,6 @@ const renderAdminHeader = () => {
 	return (
 		<div className={styles.headerContainer}>
 			<NavLink to="/admin-home">View all Classes</NavLink>
-			<NavLink to="/new-task">Create a New Assignment</NavLink>
 			<NavLink to="/admin/register">Register a student</NavLink>
 			<NavLink to="/admin-survey">Create Survey</NavLink>
 		</div>

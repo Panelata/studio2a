@@ -1,5 +1,6 @@
 import React from 'react';
 import auth from './auth';
+import './registerStyle.css'
 
 // TODO: style page and display error/confirmation messages
 
@@ -13,7 +14,7 @@ const Register = () => {
 
     const register = (ev) =>{
         ev.preventDefault();
-        if(userType != ""){
+        if(userType !== ""){
             auth.register([firstName, lastName, email, username, password, userType], (success, msg) =>{
                 if(success){
                     console.log("USER CREATED");
@@ -28,8 +29,8 @@ const Register = () => {
     }
 
     return (
-        <div>
-            <h1>Register User</h1>
+        <div className='register'>
+            <h2>Register User</h2>
             <form onSubmit={(ev)=>register(ev)}>
                 <label>First Name</label>
                 <input required type="text" onChange={(ev)=>setFirstName(ev.target.value)} />
@@ -46,14 +47,17 @@ const Register = () => {
                 <label>Password</label>
                 <input required type="password" onChange={(ev)=>setPassword(ev.target.value)} />
 
+                <div>
                 <label>User Type</label>
+                </div>
+                <div>
                 <select onChange={(ev)=>setUserType(ev.target.value)} >
                     <option hidden>User Type</option>
                     <option value="student">Student</option>
                     <option value="admin">Admin</option>
                 </select>
-
-                <button type="submit">Register</button>
+                </div>
+                <button type="submit" className="btn btn-primary btn-block btn-large">Register</button>
             </form>
         </div>
     )
