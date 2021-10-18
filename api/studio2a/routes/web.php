@@ -23,3 +23,6 @@ $router->get('test', 'TestController@test');
 $router->post('register', 'LoginController@register');
 $router->post('login', 'LoginController@login');
 $router->post('login/token', 'LoginController@checkToken');
+
+//Survey Endpoints
+$router->post('survey', 'SurveyController@createSurvey');

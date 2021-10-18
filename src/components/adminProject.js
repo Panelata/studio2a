@@ -1,3 +1,5 @@
+//To save time lets just hard code the skills
+
 import React from 'react';
  const AdminProject = (props) => {
     const [projectName, setProjectName] = React.useState('');
@@ -13,8 +15,25 @@ import React from 'react';
     }
 
     const removeSkill = (skill) => {
-        console.log('removing ' + skill);
         setSkills(skills.filter(item => item !== skill));
+    }
+
+    const uploadSurvey = () => {
+        console.log(skills);
+        console.log(projectName);
+        console.log(size);
+
+        fetch('http://127.0.0.1:8000/survey', {
+            method: 'POST', 
+            body: JSON.stringify({
+                projectName: projectName,
+                size: size,
+                skills: skills
+            })
+        })
+        .then(response => {
+            console.log("test");
+        })
     }
 
      return (
@@ -40,6 +59,7 @@ import React from 'react';
                     <option>Skill 3</option>
                     <option>Skill 4</option>
             </select> 
+            <button onClick={uploadSurvey}>Upload Survey</button>
          </div>
      )
  }
