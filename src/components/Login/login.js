@@ -31,6 +31,7 @@ const Login = props => {
             });
         }
 	})
+	const [shown, setShown] = React.useState(false);
 
 	const login = (ev) =>{
 		ev.preventDefault();
@@ -41,8 +42,18 @@ const Login = props => {
 				props.checkLogin();
 			} else {
 				console.log("Unsuccessful");
+				document.getElementById("error").textContent = "Inncorrect username or password."
 			}
 		});
+	}
+
+	const toggleVisiblity = () => {
+		var test = document.getElementById("reveal")
+		if(shown)
+			test.textContent = "Reveal password"
+		else
+			test.textContent = "Hide password"
+		setShown(shown ? false : true);
 	}
 
 	return (
@@ -52,8 +63,10 @@ const Login = props => {
 				<label>Username</label>
 				<input required type="text" onChange={(ev)=>setUsername(ev.target.value)} />
 				<label>Password</label>
-				<input required type="password" onChange={(ev)=>setPassword(ev.target.value)} />
 				<label><input type="checkbox" onChange={()=>setKeepSignin(!keepSignin)} /> Keep me signed in</label>
+				<input required type={shown ? "text" : "password"} onChange={(ev)=>setPassword(ev.target.value)} />
+				<div class="inner"> <i id="reveal" role="button" onClick={toggleVisiblity} title={shown ? "Hide password" : "Reveal password"}> Reveal password </i> </div>
+				<span id="error" className="error"> </span>
 				<button type="submit" className="btn btn-primary btn-block btn-large">Log In</button>
 			</form>
 		</div>

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./studentHome.module.css"
 import { Link } from 'react-router-dom';
 
-// dumby class list for demo before db connection
+// example class list for demo before db connection
 const classes = [
 	{
 		id: "01231234",
