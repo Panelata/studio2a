@@ -3,14 +3,16 @@ import { NavLink } from 'react-router-dom';
 import styles from './header.module.css';
 import auth from '../auth';
 
-
 const renderAdminHeader = () => {
 	return (
+		
 		<div className={styles.headerContainer}>
-			<NavLink to="/admin-home">View all Classes</NavLink>
-			<NavLink to="/new-task">Create a New Assignment</NavLink>
-			<NavLink to="/admin/register">Register a student</NavLink>
+			<NavLink to="/admin-home" exact activeStyle={{fontWeight: 'bold',color: 'blue' }} >View all Classes </NavLink>
+				<NavLink to="/new-task" exact activeStyle={{fontWeight: 'bold',color: 'blue' }} >Create New Assignment</NavLink>
+				<NavLink to="/admin/register" exact activeStyle={{fontWeight: 'bold', color:'blue'}}>Register a student</NavLink>
+			
 		</div>
+		
 	)
 }
 
@@ -37,6 +39,7 @@ const Header = () => {
 				<>
 					You are logged in as a {userType}
 					{(userType === "student" && renderStudentHeader()) || (userType === "admin" && renderAdminHeader())}
+					
 				</>
 				:
 				<>

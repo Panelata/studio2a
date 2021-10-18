@@ -9,3 +9,17 @@
 	min-height: 100px;
 	align-items: center;
 }
+
+a {
+    text-decoration: none;
+  }
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 50;
+	overflow: hidden;
+	background-color: #808080;
+  }
+
+

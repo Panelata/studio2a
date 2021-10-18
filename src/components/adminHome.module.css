@@ -21,7 +21,7 @@
     padding: 8px;
   }
 
-  .theButton {
+  .notificationButton {
     background-color: #008CBA;
     border: none;
     color: white;
@@ -30,51 +30,20 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    margin-top: 30px;
   }
 
-  .boxcontainer {
-    width: 500px;
-    height: 450px;
-    margin: 20px auto;
-    margin-top: 35px;
-    position: relative;
-  }
 
-  .box1, .box2, .box3, .box4 {
+  .box1{
     background-color: lightblue;
-    width: 200px;
-    height: 180px;
-    border-radius: 10px;
-    padding: 40px;
-    padding-top: 60px;
+    margin: auto;
+    width: 50%;
+    padding: 20px;
     font-weight: bold;
     font-size: large;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border-radius: 25px;
   }
 
-  .box1 {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
 
-  .box2 {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-  }
-  
-  .box3 {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-  }
-
-  .box4 {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-  }
 
