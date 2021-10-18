@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from "./adminClass.module.css"
+import { Link } from 'react-router-dom';
 
 const AdminClass = (props) => {
 	const { subjectName } = props.location;
@@ -13,8 +14,15 @@ const AdminClass = (props) => {
 			</div>
 
 			<div className={styles.boxcontainer}>
-					<div className={styles.box1}> Create Project </div>
-					<div className={styles.box2}> Manage Groups </div>
+				<div className={styles.box1}> Create Project </div>
+				<div className={styles.box2}>
+					<Link to={{
+						pathname: "/admin/manage-groups",
+						subjectName: "Programming Fundamentals"
+					}}>
+						Manage Groups
+					</Link>
+				</div>
 			</div>
 
 		</div>

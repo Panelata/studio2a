@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from "./admimManageGroups.module.css";
+import styles from "./adminManageGroups.module.css";
 import kmeans from "node-kmeans";
 
 const data = [
@@ -65,7 +65,7 @@ const AdminManageGroups = (props) => {
 
 	return (
 		<div style={{ auto: "max-content" }}>
-			<h1>Welcome to {subjectName}</h1>
+			<h1>Manageing groups for {subjectName}</h1>
 			<div className={styles.options}>
 				<div className={styles.column}>
 					<button className={styles.btn} disabled={!groups || groups.length == 0} onClick={toggleShowGroups}>View all groups</button>
@@ -78,7 +78,7 @@ const AdminManageGroups = (props) => {
 			<div className="groups" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 				{showGroups &&
 					groups.map((group, i) =>
-						<div
+						<div useRef
 							style={{ border: "1px solid black", display: "flex", flexDirection: "column", margin: "30px", padding: "20px", width: "600px", alignItems: "center" }}
 							key={i}>
 							<div style={{ textDecoration: "underline", fontWeight: "bold" }}>Group {i + 1}</div>
