@@ -38,7 +38,7 @@ const AdminHome = () => {
 
 					</div>
 				)) :
-					(<div>Sorry you haven't joined/been added to any classes yet</div>)
+					(<div>Sorry you aren't teaching any classes yet</div>)
 				}
 			</div>
 

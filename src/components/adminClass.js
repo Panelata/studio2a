@@ -18,7 +18,7 @@ const AdminClass = (props) => {
 					<button className={styles.btn}>Generate Groups</button>
 				</div>
 				<div className={styles.column}>
-					<button className={styles.btn} >Take the survey to assign yourself to a group</button>
+					<button className={styles.btn} > Create Survey</button>
 				</div>
 			</div>
 		</div>
