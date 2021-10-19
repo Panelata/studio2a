@@ -1,45 +1,41 @@
-import React from 'react';
+import React, {Component} from 'react';
 import styles from "./adminHome.module.css"
 import { Link } from 'react-router-dom';
+import axios from "axios";
+import SubjectList from "./SubjectList";
 
-const AdminHome = () => {
+
+class AdminHome extends Component {
+
+	state = {
+		subjects: [],
+		url: "http://127.0.0.1:8000/subject/retrieve"
+	}
+getSubjects = async () => {
+		const subjects = await axios.get(this.state.url);
+		this.setState({subjects: subjects.data});
+	} 
+
+componentDidMount(){
+	this.getSubjects();
+}
+
+
+render(){
 	return (
 		<div>
-			<h1> This is the admin Homepage </h1>
-
 			<div>
-				<button type="button" className={styles.theButton}>Notifications </button>
+			<h1> This is the admin Homepage </h1>
 			</div>
+		<button type="button" className={styles.theButton}>Notifications </button>
 
-			<div className={styles.boxcontainer}>
-				<div className={styles.box1}> <Link to={{
-					pathname: "/admin/class",
-					subjectName: "Software Engineering Studio 1a",
-					subjectID: 1
-				}}>Software Engineering Studio 1a</Link></div>
-				<div className={styles.box2}>
-					<Link to={{
-						pathname: "/admin/class",
-						subjectName: "Software Engineering Studio 1a"
-					}}>Software Engineering Studio 2b</Link>
-				</div>
-				<div className={styles.box3}>
-					<Link to={{
-						pathname: "/admin/class",
-						subjectName: "Data Structures and Algorithms"
-					}}>Data Structures and Algorithms</Link>
-				</div>
-				<div className={styles.box4}>
-					<Link to={{
-						pathname: "/admin/class",
-						subjectName: "Programming Fundamentals"
-					}}>Programming Fundamentals</Link>
-				</div>
-			</div>
-
-
+		{(this.state.subjects.length > 1 && <SubjectList subjects={this.state.subjects}/>) 
+		|| (this.state.subjects.length < 1 && <h4>No subjects currently exist, you can create subjects via the "Create a subject" page</h4>)}
 		</div>
 	)
 }
+	
+}
+
 
 export default AdminHome;

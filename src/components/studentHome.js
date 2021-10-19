@@ -24,8 +24,8 @@ render(){
 	return (
 		<div>
 			<h1>student homepage </h1>
-			<SubjectList subjects={this.state.subjects}/>
-			{}
+			{(this.state.subjects.length > 1 && <SubjectList subjects={this.state.subjects}/>) 
+		|| (this.state.subjects.length < 1 && <h4>No subjects currently exist, please contact an admin</h4>)}
 		</div>
 	)
 }
