@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSurveyTable extends Migration
+class CreateProjectTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSurveyTable extends Migration
      */
     public function up()
     {
-        Schema::create('survey', function (Blueprint $table) {
+        Schema::create('project', function (Blueprint $table) {
             $table->bigIncrements('projectID');
             $table->string('projectName', 45);
             $table->integer('size');
@@ -27,6 +27,6 @@ class CreateSurveyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('survey');
+        Schema::dropIfExists('project');
     }
 }

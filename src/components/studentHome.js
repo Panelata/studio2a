@@ -1,42 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from "./studentHome.module.css"
 import { Link } from 'react-router-dom';
+import axios from "axios";
+import SubjectList from "./SubjectList";
 
-// example class list for demo before db connection
-const classes = [
-	{
-		id: "01231234",
-		name: "Software Engineering Studio 1a"
-	},
-	{
-		id: "89786231",
-		name: "Data Structures and Algorithms"
-	},
-	{
-		id: "89712121",
-		name: "Engineering Communication"
+
+class StudentHome extends Component {
+
+	state = {
+		subjects: [],
+		url: "http://127.0.0.1:8000/subject/retrieve"
 	}
-];
+getSubjects = async () => {
+		const subjects = await axios.get(this.state.url);
+		this.setState({subjects: subjects.data});
+	} 
 
-const StudentHome = () => {
+componentDidMount(){
+	this.getSubjects();
+}
+	
+render(){
 	return (
 		<div>
 			<h1>student homepage </h1>
-			<div className={styles.mainContainer}>This is the student box
-				{classes ? (classes.map(studentClass => 
-					<div key={studentClass.id}>
-					<Link to={{
-						pathname: "/student/class",
-						subjectName: studentClass.name
-					}}
-					>View {studentClass.name}!</Link>
-					</div>
-				)) :
-					(<div>Sorry you haven't joined/been added to any classes yet</div>)
-				}
-			</div>
+			<SubjectList subjects={this.state.subjects}/>
+			{}
 		</div>
 	)
+}
 }
 
 export default StudentHome;
