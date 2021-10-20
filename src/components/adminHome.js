@@ -29,7 +29,7 @@ render(){
 			</div>
 		<button type="button" className={styles.theButton}>Notifications </button>
 
-		{(this.state.subjects.length > 1 && <SubjectList subjects={this.state.subjects}/>) 
+		{(this.state.subjects.length > 0 && <SubjectList subjects={this.state.subjects}/>) 
 		|| (this.state.subjects.length < 1 && <h4>No subjects currently exist, you can create subjects via the "Create a subject" page</h4>)}
 		</div>
 	)
