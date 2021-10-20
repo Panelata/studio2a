@@ -20,8 +20,8 @@ const AdminHome = () => {
 				<div className={styles.box2}>
 					<Link to={{
 						pathname: "/admin/class",
-						subjectName: "Software Engineering Studio 1a"
-					}}>Software Engineering Studio 2b</Link>
+						subjectName: "Software Engineering Studio 1b"
+					}}>Software Engineering Studio 1b</Link>
 				</div>
 				<div className={styles.box3}>
 					<Link to={{
