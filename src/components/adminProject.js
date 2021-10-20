@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import styles from "./adminProject.module.css"
 
  const AdminProject = (props) => {
     const history = useHistory();
@@ -47,28 +48,34 @@ import { useHistory } from 'react-router-dom';
 
      return (
          <div>
-            <p>{props.location.subjectName} > Create Project</p>
+            <p className={styles.PageHeader}>{props.location.subjectName} > Create Project</p>
             <label>Project Name</label>
-            <input type="text" onChange={(ev)=>setProjectName(ev.target.value)} />
+            <br/>
+            <input className={styles.input} type="text" onChange={(ev)=>setProjectName(ev.target.value)} />
+            <br/>
             <label>Group Size</label>
-            <input type="number" onChange={(ev)=>setSize(ev.target.value)} />
+            <br/>
+            <input className={styles.input} type="number" onChange={(ev)=>setSize(ev.target.value)} />
             {
                 skills.map((skill, key) => 
                     <div key={key}>
                       <p>{skill}</p>
-                      <button onClick={()=>{removeSkill(skill)}}>Remove</button>
+                      <button className={styles.removeButton} onClick={()=>{removeSkill(skill)}}>Remove</button>
                     </div>
                 )
             }
+            <br/>
             <label>Add Skill</label>
-            <select onChange={(ev)=>addSkill(ev.target.value)}>
+            <br/>
+            <select className={styles.selectSkillMenu} onChange={(ev)=>addSkill(ev.target.value)}>
                     <option hidden>Select Skill</option>
                     <option>Skill 1</option>
                     <option>Skill 2</option>
                     <option>Skill 3</option>
                     <option>Skill 4</option>
             </select> 
-            <button onClick={uploadSurvey}>Upload Survey</button>
+            <br/>
+            <button className={styles.uploadButton} onClick={uploadSurvey}>Upload Survey</button>
          </div>
      )
  }
