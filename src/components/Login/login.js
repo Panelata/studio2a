@@ -48,11 +48,11 @@ const Login = props => {
 	}
 
 	const toggleVisiblity = () => {
-		var test = document.getElementById("reveal")
+		var id = document.getElementById("reveal")
 		if(shown)
-			test.textContent = "Reveal password"
+			id.textContent = "Reveal password"
 		else
-			test.textContent = "Hide password"
+			id.textContent = "Hide password"
 		setShown(shown ? false : true);
 	}
 
@@ -61,10 +61,10 @@ const Login = props => {
 			<h1 > Login </h1>
 			<form onSubmit={(ev)=>login(ev)}>
 				<label>Username</label>
-				<input required type="text" onChange={(ev)=>setUsername(ev.target.value)} />
+				<input required type="text" onChange={(ev)=>{setUsername(ev.target.value); document.getElementById("error").textContent=""}} />
 				<label>Password</label>
+				<input required type={shown ? "text" : "password"} onChange={(ev)=>{setPassword(ev.target.value); document.getElementById("error").textContent=""}} />
 				<label><input type="checkbox" onChange={()=>setKeepSignin(!keepSignin)} /> Keep me signed in</label>
-				<input required type={shown ? "text" : "password"} onChange={(ev)=>setPassword(ev.target.value)} />
 				<div class="inner"> <i id="reveal" role="button" onClick={toggleVisiblity} title={shown ? "Hide password" : "Reveal password"}> Reveal password </i> </div>
 				<span id="error" className="error"> </span>
 				<button type="submit" className="btn btn-primary btn-block btn-large">Log In</button>
