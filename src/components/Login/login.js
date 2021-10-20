@@ -66,10 +66,10 @@ const Login = props => {
 	}
 
 	return (
-		<div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '80vh'}}>
-			<Card sx={{ minWidth: 275, maxWidth: 300 }}>
+		<div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '60vh'}}>
+			<Card sx={{ width: 350, paddingTop: 5, paddingBottom: 5 }}>
 				<CardContent>
-					<Grid container spacing={2} justifyContent="center">
+					<Grid container direction="column" spacing={0} justifyContent="center">
 						<form onSubmit={(ev)=>login(ev)}>
 							<Grid item xs={12}>
 								<Typography sx={{ fontSize: 34 }} color="text.primary" gutterBottom>
