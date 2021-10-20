@@ -1,0 +1,65 @@
+/* Page container */
+.group-arrangement-pg-wrapper {
+  /* text-align: unset !important; */
+}
+
+/* Inner page container */
+.group-arrangement-pg-container {
+}
+
+/* Page heading */
+.page-heading-container > .page-heading {
+  display: inline;
+}
+
+/* Group heading and group row container */
+.group-arrangement-pg-container > .main-data-container {
+  /* border: 1px solid red; */
+  padding: 40px;
+  height: max-content;
+}
+
+.all-groups-single-head {
+  font-size: 20px;
+  margin-bottom: 20px;
+  margin-left: -8px;
+}
+
+/* Group name + subject list container */
+.group-head-and-group-row-container {
+  margin-top: 34px;
+}
+
+/* Group name */
+.group-head-and-group-row-container > .group-head-name {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+/* 4 blocks subject container row */
+.group-head-and-group-row-container > .subjects-group-container {
+  /* border: 1px solid blue; */
+  padding-left: 14px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 60px;
+}
+
+/* Subject block */
+.subjects-group-container > .subject-container {
+  border: 2px solid black;
+  border-radius: 30px;
+  height: 240px;
+  min-width: 130px;
+
+  text-align: center;
+
+  /* For center alignment of text in subject box */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Error div */
+.subjects-group-container > .error-no-joining {
+}
