@@ -66,7 +66,7 @@ const Login = props => {
 	}
 
 	return (
-		<div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '70vh'}}>
+		<div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '95vh', backgroundImage: 'url("https://ok8static.oktacdn.com/fs/bco/7/fs092kz503qXkTkn73l6")'}}>
 			<Card sx={{ width: 350, paddingTop: 5, paddingBottom: 5 }}>
 				<CardContent>
 					<Grid container direction="column" spacing={0} justifyContent="center">
