@@ -66,7 +66,7 @@ const Login = props => {
 	}
 
 	return (
-		<div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '60vh'}}>
+		<div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '70vh'}}>
 			<Card sx={{ width: 350, paddingTop: 5, paddingBottom: 5 }}>
 				<CardContent>
 					<Grid container direction="column" spacing={0} justifyContent="center">
