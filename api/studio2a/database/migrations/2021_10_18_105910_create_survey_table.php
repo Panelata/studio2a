@@ -17,7 +17,6 @@ class CreateSurveyTable extends Migration
             $table->bigIncrements('projectID');
             $table->string('projectName', 45);
             $table->integer('size');
-            $table->integer('subjectID');
         });
     }
 
