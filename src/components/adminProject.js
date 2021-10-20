@@ -9,6 +9,7 @@ import styles from "./adminProject.module.css"
     const [projectName, setProjectName] = React.useState('');
     const [size, setSize] = React.useState('');
     const [skills, setSkills] = React.useState([]);
+    const [subjectID, setSubjectID] = React.useState('');
     
     React.useEffect(()=>{
         console.log(props);
@@ -26,13 +27,15 @@ import styles from "./adminProject.module.css"
         console.log(skills);
         console.log(projectName);
         console.log(size);
+        console.log(subjectID);
 
         fetch('http://127.0.0.1:8000/survey', {
             method: 'POST', 
             body: JSON.stringify({
                 projectName: projectName,
                 size: size,
-                skills: skills
+                skills: skills,
+                subjectID: props.location.subjectID
             })
         })
         .then(response => {
@@ -48,10 +51,15 @@ import styles from "./adminProject.module.css"
 
      return (
          <div>
+           
             <p className={styles.PageHeader}>{props.location.subjectName} > Create Project</p>
             <label>Project Name</label>
             <br/>
             <input className={styles.input} type="text" onChange={(ev)=>setProjectName(ev.target.value)} />
+            <br/>
+            <label>Subject ID </label>
+            <br/>
+            <input className={styles.input} value={props.location.subjectID} type="number" onChange={(ev)=>setSubjectID(ev.target.value)} /> 
             <br/>
             <label>Group Size</label>
             <br/>

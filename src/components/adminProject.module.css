@@ -1,6 +1,6 @@
 .PageHeader {
     font-size: large;
-    margin-top: 50px;
+    margin-top: 10px;
     margin-bottom: 30px;
 }
 
@@ -11,12 +11,10 @@
     border: 1px solid black;
     border-radius: 4px;
     background-color: white;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     font-size: large;
     background: rgba(0, 0, 0, 0.3);
   }
-
 
   .selectSkillMenu {
     width: 30%;
@@ -24,8 +22,9 @@
     margin: 8px 0;
     background: rgba(0, 0, 0, 0);
     border-radius: 4px;
-    font-size: large;
+    font-size: medium;
     margin-bottom: 30px;
+    display: inline-block;
   }
 
   .removeButton {
