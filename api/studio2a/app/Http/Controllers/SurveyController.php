@@ -20,6 +20,7 @@ class SurveyController extends Controller
         $survey = new Survey;
         $survey->projectName = $bodyContent['projectName'];
         $survey->size = $bodyContent['size'];
+        $survey->subjectID = $bodyContent['subjectID'];
         $survey->save();
 
         Log::debug($survey);
