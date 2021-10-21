@@ -66,11 +66,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
     }
 
      return (
-        <div style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center', height: '95vh'}}>
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center'}}>
             <Card sx={{ width: 700, paddingTop: 5, paddingBottom: 5 }}>
                 <CardContent>
-                    <Grid container direction="column" spacing={0} justifyContent="center">
-                        <form onSubmit={(ev)=>{}}>
+                    <form onSubmit={(ev)=>{}}>
+                        <Grid container direction="column" spacing={2} justifyContent="center">                        
                             <Grid item xs={12}>
                                 <Typography sx={{ fontSize: 24 }} color="text.primary" gutterBottom>
                                     Software Engineering Studio 1a {'>'} Create Project
@@ -82,16 +82,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
                             <Grid item xs={12}>
                                 <TextField sx={{ minWidth: 250 }} id="outlined-basic" label="Group Size" variant="outlined" helper="Group Size" required type="text" onChange={(ev)=>setSize(ev.target.value)}/>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid container xs={12} direction="column" spacing={0} justifyContent="center" alignItems="center">
                                 {
                                     skills.map((skill, key) => 
-                                        <div key={key} style={{display: 'flex', flexDirection: 'row', alignItems:'center'}}>
-                                            <Typography component="h3">{skill}</Typography>
-                                            <IconButton aria-label="delete" onClick={()=>{removeSkill(skill)}}>
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        {/* <Button variant="outlined" onClick={()=>{removeSkill(skill)}} endIcon={<DeleteIcon />} color="error">Remove</Button> */}
-                                        </div>
+                                        <Grid item xs={12}>
+                                            <div key={key} style={{display: 'flex', flexDirection: 'row', alignItems:'center'}}>
+                                                <Typography component="h3">{skill}</Typography>
+                                                <IconButton aria-label="delete" onClick={()=>{removeSkill(skill)}}>
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            {/* <Button variant="outlined" onClick={()=>{removeSkill(skill)}} endIcon={<DeleteIcon />} color="error">Remove</Button> */}
+                                            </div>
+                                        </Grid>
                                     )
                                 }
                             </Grid>
@@ -101,13 +103,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
                                     <Select
                                         labelId="project-select-label"
                                         id="project-select"
-                                        value={'test'}
+                                        value={''}
                                         label="Select Skill"
                                         onChange={(ev)=>addSkill(ev.target.value)}
+                                        // TODO probably need to make a multiple select and change value ^ to a variable
                                     >
                                         {
-                                            skillOptions.map(skill =>
-                                                <MenuItem value={skill}>{skill}</MenuItem>
+                                            skillOptions.map((skill, key) =>
+                                                <MenuItem value={skill} key={key}>{skill}</MenuItem>
                                             )
                                         }
                                     </Select>
@@ -115,9 +118,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
                             </Grid>
                             <Grid item xs={12}>
                                 <Button sx={{ minWidth: 250 }} type="submit" variant="contained" onClick={uploadSurvey} >Upload Survey</Button>
-                            </Grid>
-                        </form>
-                    </Grid>
+                            </Grid>                        
+                        </Grid>
+                    </form>
                 </CardContent>
             </Card>
         </div>
