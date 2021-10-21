@@ -11,35 +11,32 @@ class Auth{
 
     //Handles Login
     login(login, cb){
-        this.authenticated = true;
-        this.userType = 'student';
-        cb(true);
-        // fetch('http://127.0.0.1:8000/login', {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         username: login[0],
-        //         password: login[1]
-        //     })
-        // })
-        // .then(response =>{
-        //     return response.json();
-        // })
-        // .then(data =>{
-        //     if(data.success){
-        //         this.authenticated = true;
-        //         this.userType = data.userType;
-        //         sessionStorage.setItem('sessionToken', data.token);
-        //         if(login[2]){
-        //             localStorage.setItem('token', data.token);
-        //         }
-        //         cb(true);
-        //     } else {
-        //         this.authenticated = false;
-        //         this.userType = '';
-        //         cb(false);
+        fetch('http://127.0.0.1:8000/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                username: login[0],
+                password: login[1]
+            })
+        })
+        .then(response =>{
+            return response.json();
+        })
+        .then(data =>{
+            if(data.success){
+                this.authenticated = true;
+                this.userType = data.userType;
+                sessionStorage.setItem('sessionToken', data.token);
+                if(login[2]){
+                    localStorage.setItem('token', data.token);
+                }
+                cb(true);
+            } else {
+                this.authenticated = false;
+                this.userType = '';
+                cb(false);
                
-        //     }
-        // });
+            }
+        });
     }
 
     //Register new user
