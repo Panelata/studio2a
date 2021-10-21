@@ -9,7 +9,6 @@ import styles from "./adminProject.module.css"
     const [projectName, setProjectName] = React.useState('');
     const [size, setSize] = React.useState('');
     const [skills, setSkills] = React.useState([]);
-    const [subjectID, setSubjectID] = React.useState('');
 
     React.useEffect(()=>{
         console.log(props);
@@ -34,7 +33,7 @@ import styles from "./adminProject.module.css"
                 projectName: projectName,
                 size: size,
                 skills: skills,
-                subjectID: subjectID
+                subjectID: props.location.subjectID
 
             })
         })
@@ -56,9 +55,6 @@ import styles from "./adminProject.module.css"
             <br/>
             <input className={styles.input} type="text" onChange={(ev)=>setProjectName(ev.target.value)} />
             <br/>
-            <label>SubjectID</label>
-            <br/>
-            <input className={styles.input} type="number" value={props.location.subjectID} onChange={(ev)=>setSubjectID(ev.target.value)} />
             <br/>
             <label>Group Size</label>
             <br/>

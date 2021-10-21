@@ -39,19 +39,42 @@ class SurveyController extends Controller
     }
 
     public function retrieveSurvey(Request $request)
-    //returns all survey results if unspecified
-    //retrieve specific survey given subjectID
+    //returns all survey results if no parameters
+    // eg: survey/retrieve
+    //otherwise returns latest survey from subject
+    // eg: survey/retrieve?subjectID=127
+
     {
         Log::debug("retrieving Survey...");
         $surveys = Survey::all();
+        $response['success'] = true;
+        $response['status'] = 200;
+
 
         if ($request->has('subjectID')) {
-            $surveys = Survey::where('subjectID','=', $request->subjectID)->get();;
+            $surveys = Survey::where('subjectID','=', $request->subjectID)->get();
+            $latestsurvey = end($surveys); reset($surveys);
+            return response()->json(end($latestsurvey));
+        }
+
+        return response()->json($surveys);
+    }
+
+    public function retrieveSkills(Request $request)
+    //returns all skill mappings if no parameters
+    // eg: survey/skills
+    //returns skill mappings for given projectID
+    // eg: survey/skills?projectID=3
+    {
+        Log::debug("retrieving Survey...");
+        $skillmappings = SkillsMapping::all();
+
+        if ($request->has('projectID')){
+            $skillmappings = SkillsMapping::where('projectID', '=', $request->projectID)->get();
         }
 
         $response['success'] = true;
         $response['status'] = 200;
-        return response()->json($surveys);
+        return response()->json($skillmappings);
     }
-
 }
