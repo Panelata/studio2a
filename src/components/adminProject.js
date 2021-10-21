@@ -69,58 +69,57 @@ import DeleteIcon from '@mui/icons-material/Delete';
         <div style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center'}}>
             <Card sx={{ width: 700, paddingTop: 5, paddingBottom: 5 }}>
                 <CardContent>
-                    <form onSubmit={(ev)=>{}}>
-                        <Grid container direction="column" spacing={2} justifyContent="center">                        
-                            <Grid item xs={12}>
-                                <Typography sx={{ fontSize: 24 }} color="text.primary" gutterBottom>
-                                    Software Engineering Studio 1a {'>'} Create Project
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField sx={{ minWidth: 250 }} id="outlined-basic" label="Project Name" variant="outlined" helper="Project Name" required type="text" onChange={(ev)=>setProjectName(ev.target.value)}/>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField sx={{ minWidth: 250 }} id="outlined-basic" label="Group Size" variant="outlined" helper="Group Size" required type="text" onChange={(ev)=>setSize(ev.target.value)}/>
-                            </Grid>
-                            <Grid container xs={12} direction="column" spacing={0} justifyContent="center" alignItems="center">
-                                {
-                                    skills.map((skill, key) => 
-                                        <Grid item xs={12}>
-                                            <div key={key} style={{display: 'flex', flexDirection: 'row', alignItems:'center'}}>
-                                                <Typography component="h3">{skill}</Typography>
-                                                <IconButton aria-label="delete" onClick={()=>{removeSkill(skill)}}>
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            {/* <Button variant="outlined" onClick={()=>{removeSkill(skill)}} endIcon={<DeleteIcon />} color="error">Remove</Button> */}
-                                            </div>
-                                        </Grid>
-                                    )
-                                }
-                            </Grid>
-                            <Grid item xs={12}>
-                                <FormControl sx={{ minWidth: 250 }}>
-                                    <InputLabel id="project-select-label">Add Skill</InputLabel>
-                                    <Select
-                                        labelId="project-select-label"
-                                        id="project-select"
-                                        value={''}
-                                        label="Select Skill"
-                                        onChange={(ev)=>addSkill(ev.target.value)}
-                                        // TODO probably need to make a multiple select and change value ^ to a variable
-                                    >
-                                        {
-                                            skillOptions.map((skill, key) =>
-                                                <MenuItem value={skill} key={key}>{skill}</MenuItem>
-                                            )
-                                        }
-                                    </Select>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Button sx={{ minWidth: 250 }} type="submit" variant="contained" onClick={uploadSurvey} >Upload Survey</Button>
-                            </Grid>                        
+                    <Grid container direction="column" spacing={2} justifyContent="center">                        
+                        <Grid item xs={12}>
+                            {/* The below component could be replaced with the 'breadcrumbs' material-ui component  */}
+                            <Typography sx={{ fontSize: 24 }} color="text.primary" gutterBottom>
+                                Software Engineering Studio 1a {'>'} Create Project
+                            </Typography>
                         </Grid>
-                    </form>
+                        <Grid item xs={12}>
+                            <TextField sx={{ minWidth: 250 }} id="outlined-basic" label="Project Name" variant="outlined" helper="Project Name" required type="text" onChange={(ev)=>setProjectName(ev.target.value)}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField sx={{ minWidth: 250 }} id="outlined-basic" label="Group Size" variant="outlined" helper="Group Size" required type="text" onChange={(ev)=>setSize(ev.target.value)}/>
+                        </Grid>
+                        <Grid container xs={12} direction="column" spacing={0} justifyContent="center" alignItems="center">
+                            {
+                                skills.map((skill, key) => 
+                                    <Grid item xs={12}>
+                                        <div key={key} style={{display: 'flex', flexDirection: 'row', alignItems:'center'}}>
+                                            <Typography component="h3">{skill}</Typography>
+                                            <IconButton aria-label="delete" onClick={()=>{removeSkill(skill)}}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        {/* <Button variant="outlined" onClick={()=>{removeSkill(skill)}} endIcon={<DeleteIcon />} color="error">Remove</Button> */}
+                                        </div>
+                                    </Grid>
+                                )
+                            }
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FormControl sx={{ minWidth: 250 }}>
+                                <InputLabel id="project-select-label">Add Skill</InputLabel>
+                                <Select
+                                    labelId="project-select-label"
+                                    id="project-select"
+                                    value={''}
+                                    label="Select Skill"
+                                    onChange={(ev)=>addSkill(ev.target.value)}
+                                    // TODO probably need to make a multiple select and change value ^ to a variable
+                                >
+                                    {
+                                        skillOptions.map((skill, key) =>
+                                            <MenuItem value={skill} key={key}>{skill}</MenuItem>
+                                        )
+                                    }
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button sx={{ minWidth: 250 }} type="submit" variant="contained" onClick={uploadSurvey} >Upload Survey</Button>
+                        </Grid>                        
+                    </Grid>
                 </CardContent>
             </Card>
         </div>
