@@ -10,7 +10,7 @@ const AdminClass = (props) => {
 		<div>
 			<div>
 				<h2>
-					{subjectName}
+					Welcome To {subjectName}
 				</h2>
 				<br></br><br></br>
 			</div>
