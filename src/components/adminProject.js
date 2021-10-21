@@ -66,10 +66,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
     }
 
      return (
-        <div style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center'}}>
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center', paddingTop:'60px'}}>
             <Card sx={{ width: 700, paddingTop: 5, paddingBottom: 5 }}>
                 <CardContent>
-                    <Grid container direction="column" spacing={2} justifyContent="center">                        
+                    <Grid container direction="column" spacing={4} justifyContent="center">                        
                         <Grid item xs={12}>
                             {/* The below component could be replaced with the 'breadcrumbs' material-ui component  */}
                             <Typography sx={{ fontSize: 24 }} color="text.primary" gutterBottom>
