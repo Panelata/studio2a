@@ -37,4 +37,21 @@ class SurveyController extends Controller
         $response['status'] = 200;
         return response()->json($response, 200);
     }
+
+    public function retrieveSurvey(Request $request)
+    //returns all survey results if unspecified
+    //retrieve specific survey given subjectID
+    {
+        Log::debug("retrieving Survey...");
+        $surveys = Survey::all();
+
+        if ($request->has('subjectID')) {
+            $surveys = Survey::where('subjectID','=', $request->subjectID)->get();;
+        }
+
+        $response['success'] = true;
+        $response['status'] = 200;
+        return response()->json($surveys);
+    }
+
 }

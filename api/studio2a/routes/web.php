@@ -26,6 +26,7 @@ $router->post('login/token', 'LoginController@checkToken');
 
 //Survey Endpoints
 $router->post('survey', 'SurveyController@createSurvey');
+$router->get('survey/retrieve', 'SurveyController@retrieveSurvey');
 
 //class endpoints
 $router->post('subject/create', 'SubjectController@create');
