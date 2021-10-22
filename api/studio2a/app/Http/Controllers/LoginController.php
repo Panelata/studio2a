@@ -97,6 +97,7 @@ class LoginController extends Controller
         //Returns successful login 
         $response['userType'] = $user->userType;
         $response['token'] = $token->token;
+        $response['userID'] = $user->userID;
         $response['success'] = true;
         $response['status'] = 200;
         return response()->json($response, $response['status']);
