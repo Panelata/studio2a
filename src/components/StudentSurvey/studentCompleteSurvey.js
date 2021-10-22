@@ -29,6 +29,7 @@ componentDidMount(){
 				<h4>please enter a confidence score from 1-10 next to each skill</h4>
 				{(this.state.skills.length > 0 && <SkillList skills={this.state.skills}/>)
 		|| (this.state.skills.length < 1 && <h4> No Skills available</h4>)}
+				<h4>Note: Need to write code to send survey data </h4>
 			</div>
         )
     }

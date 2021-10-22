@@ -17,15 +17,11 @@ class Skill extends Component {
 
 		return(
 			<tr>
-				<td style= {{textAlign: "center"}}>{mappingID}</td>
 				<td> {skills} </td>
 				<td>{(userType === "student" && 				
 					<input></input>)
-					
 					|| (userType === "admin" && 				
-					<Link to={{
-					pathname: "/admin/project",
-					}}>View Projects</Link>)}
+					<h4>code needed to make survey editable</h4>)}
 				</td>
 			</tr>
 		);
