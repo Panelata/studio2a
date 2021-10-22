@@ -40,7 +40,7 @@ const Header = () => {
 		<div>
 			{authenticated ?
 				<>
-					You are logged in as a {userType} | <span onClick={logout}>Logout</span>
+					You are logged in as a {userType} | <span style={{ cursor: "pointer" }} onClick={logout}>Logout</span>
 					{(userType === "student" && renderStudentHeader()) || (userType === "admin" && renderAdminHeader())}
 				</>
 				:
