@@ -22,3 +22,11 @@ $router->get('test', 'TestController@test');
 //Login endpoints
 $router->post('register', 'LoginController@register');
 $router->post('login', 'LoginController@login');
+$router->post('login/token', 'LoginController@checkToken');
+
+//Survey Endpoints
+$router->post('survey', 'SurveyController@createSurvey');
+
+//class endpoints
+$router->post('subject/create', 'SubjectController@create');
+$router->get('subject/retrieve', 'SubjectController@retrieve');

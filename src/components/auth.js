@@ -6,7 +6,7 @@
 class Auth{
     constructor(){
         this.authenticated = false;
-        this.userType = '';
+        this.userType = '';  
     }
 
     //Handles Login
@@ -25,6 +25,10 @@ class Auth{
             if(data.success){
                 this.authenticated = true;
                 this.userType = data.userType;
+                sessionStorage.setItem('sessionToken', data.token);
+                if(login[2]){
+                    localStorage.setItem('token', data.token);
+                }
                 cb(true);
             } else {
                 this.authenticated = false;
@@ -59,6 +63,13 @@ class Auth{
         })
     }
 
+    logout(){
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        this.authenticated = false;
+        this.userType = false;
+    }
+
     //Returns user type
     getUserType(){
         return this.userType;
@@ -67,6 +78,12 @@ class Auth{
     //Returns authenticated state
     isAuthenticated(){
         return this.authenticated;
+    }
+
+    //Token authenticated
+    tokenAuthenticated(userType){
+        this.authenticated = true;
+        this.userType = userType;
     }
 }
 

@@ -14,7 +14,7 @@ const Register = () => {
 
     const register = (ev) =>{
         ev.preventDefault();
-        if(userType != ""){
+        if(userType !== ""){
             auth.register([firstName, lastName, email, username, password, userType], (success, msg) =>{
                 if(success){
                     console.log("USER CREATED");

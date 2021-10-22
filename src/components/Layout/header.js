@@ -9,6 +9,7 @@ const renderAdminHeader = () => {
 		<div className={styles.headerContainer}>
 			<NavLink to="/admin-home">View all Classes</NavLink>
 			<NavLink to="/admin/register">Register a student</NavLink>
+			<NavLink to="admin/class/create">Create a Subject</NavLink>
 		</div>
 	)
 }
@@ -19,6 +20,11 @@ const renderStudentHeader = () => {
 			<NavLink to="/student-home">View your classes</NavLink>
 		</div>
 	)
+}
+
+const logout = () => {
+	auth.logout();
+	window.location.reload();
 }
 
 const Header = () => {
@@ -34,7 +40,7 @@ const Header = () => {
 		<div>
 			{authenticated ?
 				<>
-					You are logged in as a {userType}
+					You are logged in as a {userType} | <span onClick={logout}>Logout</span>
 					{(userType === "student" && renderStudentHeader()) || (userType === "admin" && renderAdminHeader())}
 				</>
 				:
