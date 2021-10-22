@@ -41,12 +41,19 @@ class SurveyController extends Controller
     public function retrieveSurvey(Request $request)
     //returns all survey results 
     // eg: survey/retrieve
+    //returns all surveys available for given subject
+    // eg: survey/retrieve?subjectID=1
 
     {
         Log::debug("retrieving Survey...");
         $surveys = Survey::all();
         $response['success'] = true;
         $response['status'] = 200;
+
+        if ($request->has('subjectID')){
+            $surveys = Survey::where('subjectID', '=', $request->subjectID)
+            ->get();
+        }
 
         return response()->json($surveys);
     }
@@ -56,21 +63,31 @@ class SurveyController extends Controller
     // eg: survey/skills
     //returns skill mappings for given projectID
     // eg: survey/skills?projectID=3
+    //returns skills mapping for all projects of subject if passed subjectID
+    // eg: survey/skills?subjectID=1
     {
         Log::debug("retrieving Survey...");
 
         $skills = SkillsMapping::join('survey', 'survey.projectID', '=', 'skills_mapping.projectID')
-        ->get(['survey.subjectID','survey.projectID', 'survey.projectName', 'skills_mapping.skills']);
+        ->get(['mappingID','survey.subjectID','survey.projectID', 'survey.projectName', 'skills_mapping.skills']);
 
         if ($request->has('projectID')){
             $skills = SkillsMapping::join('survey', 'survey.projectID', '=', 'skills_mapping.projectID')
             ->where('skills_mapping.projectID', '=', $request->projectID)
-            ->get(['survey.subjectID','survey.projectID', 'survey.projectName', 'skills_mapping.skills']);
+            
+            ->get(['mappingID','survey.subjectID','survey.projectID', 'survey.projectName', 'skills_mapping.skills']);
         }
+
+        if ($request->has('subjectID')){
+            $skills = SkillsMapping::join('survey', 'survey.projectID', '=', 'skills_mapping.projectID')
+            ->where('survey.subjectID', '=', $request->subjectID)
+            ->get(['mappingID','survey.subjectID','survey.projectID', 'survey.projectName', 'skills_mapping.skills']);
+        }
+        
         $response['success'] = true;
         $response['status'] = 200;
         return response()->json($skills);
     }
-
+    
 
 }

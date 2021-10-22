@@ -20,7 +20,7 @@ const AdminClass = (props) => {
 						pathname: "/admin/class/project",
 						subjectName: subjectName,
 						subjectID: props.location.subjectID
-					}}>Create Project</Link></div>
+					}}> Create Project</Link></div>
 					<div className={styles.box2}> Manage Groups </div>
 			</div>
 

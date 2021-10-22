@@ -1,28 +1,36 @@
 //To save time lets just hard code the skills
 
-import React from 'react';
+import React, {Component} from 'react';
 import { useHistory } from 'react-router-dom';
-import styles from "./adminProject.module.css"
+import styles from "./studentProject.module.css"
+import axios from "axios";
+import { Link } from 'react-router-dom';
 
- const StudentProject = (props) => {
+class StudentProject extends Component {
 
-	state = {
-		project: '',
-		url: "http://127.0.0.1:8000/survey/retrieve?subjectID" + String(props.location.subjectID)
-	}
-    
-    getProject = async () => {
-		const project = await axios.get(this.state.url);
-		this.setState({subjects: subjects.data});
-	} 
-
-
-
-     return (
-         <div>
-
-         </div>
-     )
+    render(){
+        return (
+            <div>
+			<h1>Viewing Project: {this.props.location.projectName}</h1>
+			<div className={styles.options}>
+				<div className={styles.column}>
+					{/* TODO: flip disabled prop for enrolled group once backend is setup (should be disable if a group doesn't exist) */}
+					<button className={styles.btn} >View enrolled group</button>
+					<button className={styles.btn}>View all groups</button>
+				</div>
+				<div className={styles.column}>
+                <div className={styles.btn}>
+                <Link className={styles.link} to={{
+					pathname: "/student/class/project/completeSurvey",
+                    projectID: this.props.location.projectID,
+                    projectName: this.props.location.projectName, 
+					}}>Take survey to assign yourself to a group</Link>
+                </div>
+				</div>
+			</div>
+		</div>
+        )
+    }
  }
 
  export default StudentProject;

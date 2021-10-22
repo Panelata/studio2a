@@ -11,6 +11,7 @@ import StudentClass from './components/studentClass';
 import AdminProject from './components/adminProject';
 import CreateSubject from './components/createSubject';
 import StudentProject from './components/studentProject';
+import StudentCompleteSurvey from './components/StudentSurvey/studentCompleteSurvey';
 import Layout from './components/Layout';
 import auth from './components/auth';
 import React from 'react';
@@ -37,7 +38,8 @@ function App() {
             <RouteWrapper path='/join-task' component={StudentEntry} layout={Layout} />
             <RouteWrapper path='/student-home' component={StudentHome} layout={Layout} />
             <RouteWrapper path='/student/class' exact component={StudentClass} layout={Layout} />
-            <RouteWrapper path='/student/class/project' exact component={AdminProject} layout={Layout} />
+            <RouteWrapper path='/student/class/project' exact component={StudentProject} layout={Layout} />
+            <RouteWrapper path='/student/class/project/completeSurvey' exact component={StudentCompleteSurvey} layout={Layout} />
             {/* If the route doesn't exist, default to /home */}
             <Redirect to='/student-home' />
           </Switch>
