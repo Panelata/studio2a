@@ -81,6 +81,7 @@ const AdminManageGroups = (props) => {
 		console.log("Get Students called!")
 		let { data: students } = await axios.get(`http://127.0.0.1:8000/survey/students?projectID=${projectID}`);
 		students && setStudents(students);
+		console.log(students);
 	};
 
 	//Called on initial mount
@@ -93,6 +94,9 @@ const AdminManageGroups = (props) => {
 		<div style={{ auto: "max-content" }}>
 			<h1>NOTE: the user data is still being worked on for this page</h1>
 			<h2>{subjectName} > Project: {projectName}</h2>
+			<button className={styles.btn} onClick={toggleShowStudents}
+				style={{ width: "max-content", height: "max-content", padding: "14px", marginTop: "30px" }}
+			>Show students eligible for groups</button>
 			<div className={styles.options}>
 				<div className={styles.column}>
 					<button className={styles.btn} disabled={!groups || groups.length == 0} onClick={toggleShowGroups}>View all groups</button>
@@ -103,12 +107,26 @@ const AdminManageGroups = (props) => {
 				</div>
 			</div>
 			{showStudents && (
-					<Layer 
-						onEsc={toggleShowStudents}
-						onClickOutside={toggleShowStudents}
-					>
-						<button className={styles.btn}>Close</button> 
-					</Layer>
+				<Layer
+					onEsc={toggleShowStudents}
+					onClickOutside={toggleShowStudents}
+				>
+					<div
+						style={{ border: "1px solid black", borderRadius: "20px", display: "flex", flexDirection: "column", margin: "30px", padding: "20px", width: "600px", alignItems: "center" }}>
+						<div style={{ textDecoration: "underline", lineHeight: "40px" }}>Students who have completed the survey:</div>
+						{students.map(student => (
+							<div key={student.userID} style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+								<div>{student.firstName} {student.lastName}</div>
+							</div>
+						))}
+						<button className={styles.btn}
+							style={{ width: "max-content", height: "max-content", padding: "14px", marginTop: "20px" }}
+							onClick={toggleShowStudents}
+						>
+							Close
+						</button>
+					</div>
+				</Layer>
 			)}
 			<div className="groups" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 				{showGroups &&

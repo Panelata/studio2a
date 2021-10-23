@@ -37,3 +37,8 @@ $router->get('survey/students', 'SurveyController@retrieveStudents');
 //class endpoints
 $router->post('subject/create', 'SubjectController@create');
 $router->get('subject/retrieve', 'SubjectController@retrieve');
+
+
+//group endpoints
+$router->post('groups/create', 'GroupController@create');
+$router->get('groups/retrieve', 'GroupController@retrieve');
