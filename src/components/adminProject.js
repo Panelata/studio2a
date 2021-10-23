@@ -27,35 +27,43 @@ import styles from "./adminProject.module.css"
         console.log(projectName);
         console.log(size);
 
-        fetch('http://127.0.0.1:8000/survey', {
-            method: 'POST', 
-            body: JSON.stringify({
-                projectName: projectName,
-                size: size,
-                skills: skills
+        if (!projectName)
+            alert("Please enter a project name!");
+        else if(!size)
+            alert("Please enter a group size!");
+        else if(size <= 0 || size % 1 != 0)
+            alert("Please enter a valid group size!");
+        else{
+            fetch('http://127.0.0.1:8000/survey', {
+                method: 'POST', 
+                body: JSON.stringify({
+                    projectName: projectName,
+                    size: size,
+                    skills: skills
+                })
             })
-        })
-        .then(response => {
-            return response.json();
-        })
-        .then(data =>{
-            if(data.success){
-                console.log("Successfully created new project...Redirecting");
-                history.push("/");
-            }
-        });
+            .then(response => {
+                return response.json();
+            })
+            .then(data =>{
+                if(data.success){
+                    console.log("Successfully created new project...Redirecting");
+                    history.push("/");
+                }
+            });
+        }
     }
 
      return (
          <div>
-            <p className={styles.PageHeader}>{props.location.subjectName} > Create Project</p>
+            <p className={styles.PageHeader}>{props.location.subjectName} &gt; Create Project</p>
             <label>Project Name</label>
             <br/>
             <input className={styles.input} type="text" onChange={(ev)=>setProjectName(ev.target.value)} />
             <br/>
             <label>Group Size</label>
             <br/>
-            <input className={styles.input} type="number" onChange={(ev)=>setSize(ev.target.value)} />
+            <input className={styles.input} type="number" step="1" min="1" onChange={(ev)=>setSize(ev.target.value)} />
             {
                 skills.map((skill, key) => 
                     <div key={key}>
