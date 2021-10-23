@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\Survey;
@@ -93,7 +94,7 @@ class SurveyController extends Controller
 
     public function retrieveStudents(Request $request)
     //returns all students who have responded to a survey based on the project Id
-    // eg: survey/retrieveStudents?projectID=1
+    // eg: survey/retrieve?projectId=1
 
     {
         Log::debug("retrieving Survey...");
@@ -101,13 +102,12 @@ class SurveyController extends Controller
         $response['success'] = true;
         $response['status'] = 200;
 
-        $students = User::select('select * from users');
-        // if ($request->has('projectID')) {
-        //     $students = User::select('SELECT * FROM ((users 
-        //     INNER JOIN skill_level ON users.userID = skill_level.userID ) 
-        //     inner join skills_mapping ON skill_level.mappingID = skills_mapping.mappingID)
-        //     where skills_mapping.projectID = ? group by users.userID', [$request->projectID]);
-        // }
+        if ($request->has('projectID')) {
+            $students = DB::select('SELECT users.userID, users.firstName, users.lastName FROM ((users 
+            INNER JOIN skill_level ON users.userID = skill_level.userID ) 
+            INNER JOIN skills_mapping ON skill_level.mappingID = skills_mapping.mappingID)
+            WHERE skills_mapping.projectID = ? GROUP BY  users.userID', [$request->projectID]);
+        }
 
         return response()->json($students);
     }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from "./adminManageGroups.module.css";
 import kmeans from "node-kmeans";
-import { layer } from "grommet";
+import { Layer } from "grommet";
 import axios from "axios";
 
 const data = [
@@ -47,6 +47,7 @@ const AdminManageGroups = (props) => {
 	const [isSettingGroups, setIsSettingGroups] = useState(false);
 	const [showGroups, setShowGroups] = useState(false);
 	const [students, setStudents] = useState([]);
+	const [showStudents, setShowStudents] = useState(false);
 	const { subjectName, projectID, projectName } = props.location;
 
 	const callCluster = async () => {
@@ -66,6 +67,10 @@ const AdminManageGroups = (props) => {
 		setShowGroups(!showGroups);
 	}
 
+	const toggleShowStudents = () => {
+		setShowStudents(!showStudents);
+	}
+
 
 	// const getGroups = async () => {
 	// 	let groups = await axios.get(`http://127.0.0.1:8000/groups/retrieve?projectId=${projectID}`);
@@ -74,8 +79,8 @@ const AdminManageGroups = (props) => {
 
 	const getStudents = async () => {
 		console.log("Get Students called!")
-		let students = await axios.get(`http://127.0.0.1:8000/survey/students?projectID=${projectID}`);
-		console.log("Students:", students);
+		let { data: students } = await axios.get(`http://127.0.0.1:8000/survey/students?projectID=${projectID}`);
+		students && setStudents(students);
 	};
 
 	//Called on initial mount
@@ -97,6 +102,14 @@ const AdminManageGroups = (props) => {
 					<button className={styles.btn}>Generate Groups Randomly</button>
 				</div>
 			</div>
+			{showStudents && (
+					<Layer 
+						onEsc={toggleShowStudents}
+						onClickOutside={toggleShowStudents}
+					>
+						<button className={styles.btn}>Close</button> 
+					</Layer>
+			)}
 			<div className="groups" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 				{showGroups &&
 					groups.map((group, i) =>

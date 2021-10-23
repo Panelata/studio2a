@@ -13,6 +13,7 @@ class AdminHome extends Component {
 	getSubjects = async () => {
 		const subjects = await axios.get(this.state.url);
 		this.setState({ subjects: subjects.data });
+		console.log(subjects.data)
 	}
 
 	componentDidMount() {
