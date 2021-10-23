@@ -46,7 +46,7 @@ const AdminManageGroups = (props) => {
 	const [groups, setGroups] = useState([])
 	const [isSettingGroups, setIsSettingGroups] = useState(false);
 	const [showGroups, setShowGroups] = useState(false)
-	const { subjectName } = props.location;
+	const { subjectName, projectID, projectName } = props.location; 
 
 	const callCluster = async () => {
 		if (isSettingGroups) return "";
@@ -67,7 +67,7 @@ const AdminManageGroups = (props) => {
 
 	return (
 		<div style={{ auto: "max-content" }}>
-			<h1>Managing groups for {subjectName}</h1>
+			<h2>{subjectName} > Project: {projectName}</h2>
 			<div className={styles.options}>
 				<div className={styles.column}>
 					<button className={styles.btn} disabled={!groups || groups.length == 0} onClick={toggleShowGroups}>View all groups</button>

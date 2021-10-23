@@ -33,19 +33,19 @@ const Register = () => {
             <h2>Register User</h2>
             <form onSubmit={(ev)=>register(ev)}>
                 <label>First Name</label>
-                <input required type="text" onChange={(ev)=>setFirstName(ev.target.value)} />
+                <input className="registerInput" required type="text" onChange={(ev)=>setFirstName(ev.target.value)} />
 
                 <label>Last Name</label>
-                <input required type="text" onChange={(ev)=>setLastName(ev.target.value)} />
+                <input className="registerInput" required type="text" onChange={(ev)=>setLastName(ev.target.value)} />
 
                 <label>Email</label>
-                <input required type="text" onChange={(ev)=>setEmail(ev.target.value)} />
+                <input className="registerInput" required type="text" onChange={(ev)=>setEmail(ev.target.value)} />
 
                 <label>Username</label>
-                <input required type="text" onChange={(ev)=>setUsername(ev.target.value)} />
+                <input className="registerInput" required type="text" onChange={(ev)=>setUsername(ev.target.value)} />
 
                 <label>Password</label>
-                <input required type="password" onChange={(ev)=>setPassword(ev.target.value)} />
+                <input className="registerInput" required type="password" onChange={(ev)=>setPassword(ev.target.value)} />
 
                 <div>
                 <label>User Type</label>

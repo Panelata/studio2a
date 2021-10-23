@@ -9,7 +9,7 @@ const renderAdminHeader = () => {
 		<div className={styles.headerContainer}>
 			<NavLink to="/admin-home">View all Classes</NavLink>
 			<NavLink to="/admin/register">Register a student</NavLink>
-			<NavLink to="admin/class/create">Create a Subject</NavLink>
+			<NavLink to="/admin/class/create">Create a Subject</NavLink>
 		</div>
 	)
 }
@@ -40,7 +40,7 @@ const Header = () => {
 		<div>
 			{authenticated ?
 				<>
-					You are logged in as a {userType} | <span onClick={logout}>Logout</span>
+					You are logged in as a {userType} | <span style={{ cursor: "pointer" }} onClick={logout}>Logout</span>
 					{(userType === "student" && renderStudentHeader()) || (userType === "admin" && renderAdminHeader())}
 				</>
 				:

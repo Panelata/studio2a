@@ -11,6 +11,9 @@ import Register from './components/register';
 import StudentClass from './components/studentClass';
 import AdminProject from './components/adminProject';
 import CreateSubject from './components/createSubject';
+import StudentProject from './components/studentProject';
+import StudentCompleteSurvey from './components/StudentSurvey/studentCompleteSurvey';
+import AdminProjects from './components/adminProjects';
 import Layout from './components/Layout';
 import auth from './components/auth';
 import React from 'react';
@@ -36,7 +39,9 @@ function App() {
             {/* Declare Student routes here */}
             <RouteWrapper path='/join-task' component={StudentEntry} layout={Layout} />
             <RouteWrapper path='/student-home' component={StudentHome} layout={Layout} />
-            <RouteWrapper path='/student/class' component={StudentClass} layout={Layout} />
+            <RouteWrapper path='/student/class' exact component={StudentClass} layout={Layout} />
+            <RouteWrapper path='/student/class/project' exact component={StudentProject} layout={Layout} />
+            <RouteWrapper path='/student/class/project/completeSurvey' exact component={StudentCompleteSurvey} layout={Layout} />
             {/* If the route doesn't exist, default to /home */}
             <Redirect to='/student-home' />
           </Switch>
@@ -46,10 +51,11 @@ function App() {
             {/* Declare Admin routes here */}
             <RouteWrapper path='/admin-home' exact component={AdminHome} layout={Layout} />
             <RouteWrapper path='/admin/register' exact component={Register} layout={Layout} />
-            <RouteWrapper path='/admin/class/project' component={AdminProject} layout={Layout} />
+            <RouteWrapper path='/admin/class/create-project' component={AdminProject} layout={Layout} />
             <RouteWrapper path='/admin/class/create' component={CreateSubject} layout={Layout} />
+            <RouteWrapper path='/admin/class/manage-project' component={AdminManageGroups} layout={Layout} />
+            <RouteWrapper path='/admin/class/projects' component={AdminProjects} layout={Layout} />
             <RouteWrapper path='/admin/class' component={AdminClass} layout={Layout} />
-            <RouteWrapper path='/admin/manage-groups' component={AdminManageGroups} layout={Layout} />
             {/* If the route doesn't exist, default to /home */}
             <Redirect to='/admin-home' />
           </Switch>

@@ -41,3 +41,9 @@ button:disabled {
 	border: 1px solid #3762bc;
 	padding: 2em;
 }
+
+.link {
+	color: white;
+	font-size: 30px;
+	text-decoration: none;
+}

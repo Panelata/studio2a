@@ -6,7 +6,7 @@ import axios from "axios";
 import ProjectList from './ProjectList';
 
 
-class StudentClass extends Component {
+class AdminProjects extends Component {
 
     state = {
 		surveys: [],
@@ -25,12 +25,12 @@ class StudentClass extends Component {
     render(){
         return (
             <div>
-                <h1> {this.props.location.subjectName} > View Projects </h1>
-				{(this.state.surveys.length > 0 && <ProjectList surveys={this.state.surveys}/>)
+                <h2 style={{marginBottom:"30px"}}> {this.props.location.subjectName} > All Projects </h2>
+				{(this.state.surveys.length > 0 && <ProjectList subjectName={this.props.location.subjectName} surveys={this.state.surveys}/>)
 		|| (this.state.surveys.length < 1 && <h4> No Projects Available</h4>)}
             </div>
         )
     }
  }
 
- export default StudentClass;
+ export default AdminProjects;
