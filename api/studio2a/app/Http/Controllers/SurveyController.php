@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\Survey;
 use App\Models\SkillsMapping;
+use App\Models\User;
 
 class SurveyController extends Controller
 {
-    public function createSurvey(Request $request){
+    public function createSurvey(Request $request)
+    {
         $bodyContent = json_decode($request->getContent(), true);
         Log::debug("Creating survey");
         Log::debug($bodyContent);
@@ -26,7 +28,7 @@ class SurveyController extends Controller
         Log::debug($survey);
         Log::debug("Making skills mapping");
         //Loops through skills and create the survey mappings for these
-        foreach($bodyContent['skills'] as $skill){
+        foreach ($bodyContent['skills'] as $skill) {
             $mapping = new SkillsMapping;
             $mapping->projectID = $survey->projectID;
             $mapping->skills = $skill;
@@ -50,9 +52,9 @@ class SurveyController extends Controller
         $response['success'] = true;
         $response['status'] = 200;
 
-        if ($request->has('subjectID')){
+        if ($request->has('subjectID')) {
             $surveys = Survey::where('subjectID', '=', $request->subjectID)
-            ->get();
+                ->get();
         }
 
         return response()->json($surveys);
@@ -69,25 +71,44 @@ class SurveyController extends Controller
         Log::debug("retrieving Survey...");
 
         $skills = SkillsMapping::join('survey', 'survey.projectID', '=', 'skills_mapping.projectID')
-        ->get(['mappingID','survey.subjectID','survey.projectID', 'survey.projectName', 'skills_mapping.skills']);
+            ->get(['mappingID', 'survey.subjectID', 'survey.projectID', 'survey.projectName', 'skills_mapping.skills']);
 
-        if ($request->has('projectID')){
+        if ($request->has('projectID')) {
             $skills = SkillsMapping::join('survey', 'survey.projectID', '=', 'skills_mapping.projectID')
-            ->where('skills_mapping.projectID', '=', $request->projectID)
-            
-            ->get(['mappingID','survey.subjectID','survey.projectID', 'survey.projectName', 'skills_mapping.skills']);
+                ->where('skills_mapping.projectID', '=', $request->projectID)
+
+                ->get(['mappingID', 'survey.subjectID', 'survey.projectID', 'survey.projectName', 'skills_mapping.skills']);
         }
 
-        if ($request->has('subjectID')){
+        if ($request->has('subjectID')) {
             $skills = SkillsMapping::join('survey', 'survey.projectID', '=', 'skills_mapping.projectID')
-            ->where('survey.subjectID', '=', $request->subjectID)
-            ->get(['mappingID','survey.subjectID','survey.projectID', 'survey.projectName', 'skills_mapping.skills']);
+                ->where('survey.subjectID', '=', $request->subjectID)
+                ->get(['mappingID', 'survey.subjectID', 'survey.projectID', 'survey.projectName', 'skills_mapping.skills']);
         }
-        
+
         $response['success'] = true;
         $response['status'] = 200;
         return response()->json($skills);
     }
-    
 
+    public function retrieveStudents(Request $request)
+    //returns all students who have responded to a survey based on the project Id
+    // eg: survey/retrieveStudents?projectID=1
+
+    {
+        Log::debug("retrieving Survey...");
+        $students = User::all();
+        $response['success'] = true;
+        $response['status'] = 200;
+
+        $students = User::select('select * from users');
+        // if ($request->has('projectID')) {
+        //     $students = User::select('SELECT * FROM ((users 
+        //     INNER JOIN skill_level ON users.userID = skill_level.userID ) 
+        //     inner join skills_mapping ON skill_level.mappingID = skills_mapping.mappingID)
+        //     where skills_mapping.projectID = ? group by users.userID', [$request->projectID]);
+        // }
+
+        return response()->json($students);
+    }
 }

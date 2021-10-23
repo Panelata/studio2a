@@ -31,6 +31,8 @@ $router->post('skillLevel', 'SkillLevelController@createSkillLevel');
 $router->post('survey', 'SurveyController@createSurvey');
 $router->get('survey/retrieve', 'SurveyController@retrieveSurvey');
 $router->get('survey/skills', 'SurveyController@retrieveSkills');
+$router->get('survey/students', 'SurveyController@retrieveStudents');
+
 
 //class endpoints
 $router->post('subject/create', 'SubjectController@create');

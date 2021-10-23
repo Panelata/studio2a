@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from "./adminManageGroups.module.css";
 import kmeans from "node-kmeans";
-
-
+import { layer } from "grommet";
+import axios from "axios";
 
 const data = [
 	{ 'name': 'Tobias Snyder', 'preference-a': 1, 'preference-b': 100 },
@@ -45,8 +45,9 @@ function FormatGroupsData(groups) {
 const AdminManageGroups = (props) => {
 	const [groups, setGroups] = useState([])
 	const [isSettingGroups, setIsSettingGroups] = useState(false);
-	const [showGroups, setShowGroups] = useState(false)
-	const { subjectName, projectID, projectName } = props.location; 
+	const [showGroups, setShowGroups] = useState(false);
+	const [students, setStudents] = useState([]);
+	const { subjectName, projectID, projectName } = props.location;
 
 	const callCluster = async () => {
 		if (isSettingGroups) return "";
@@ -65,8 +66,27 @@ const AdminManageGroups = (props) => {
 		setShowGroups(!showGroups);
 	}
 
+
+	// const getGroups = async () => {
+	// 	let groups = await axios.get(`http://127.0.0.1:8000/groups/retrieve?projectId=${projectID}`);
+	// 	console.log("Groups:", groups);
+	// };
+
+	const getStudents = async () => {
+		console.log("Get Students called!")
+		let students = await axios.get(`http://127.0.0.1:8000/survey/students?projectID=${projectID}`);
+		console.log("Students:", students);
+	};
+
+	//Called on initial mount
+	React.useEffect(() => {
+		// getGroups();
+		getStudents();
+	}, []);
+
 	return (
 		<div style={{ auto: "max-content" }}>
+			<h1>NOTE: the user data is still being worked on for this page</h1>
 			<h2>{subjectName} > Project: {projectName}</h2>
 			<div className={styles.options}>
 				<div className={styles.column}>
