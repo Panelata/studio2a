@@ -35,7 +35,7 @@ class Subject extends Component {
 					pathname: "/admin/class",
 					subjectName: subjectName,
 					subjectID: subjectID
-					}}>View Projects</Link>)}
+					}}>Manage Class</Link>)}
 			
 				</td>
 			</tr>

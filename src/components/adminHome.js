@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import styles from "./adminHome.module.css"
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import styles from "./adminHome.module.css";
 import axios from "axios";
 import SubjectList from "./SubjectList";
 
@@ -11,29 +10,30 @@ class AdminHome extends Component {
 		subjects: [],
 		url: "http://127.0.0.1:8000/subject/retrieve"
 	}
-getSubjects = async () => {
+	getSubjects = async () => {
 		const subjects = await axios.get(this.state.url);
-		this.setState({subjects: subjects.data});
-	} 
+		this.setState({ subjects: subjects.data });
+		console.log(subjects.data)
+	}
 
-componentDidMount(){
-	this.getSubjects();
-}
+	componentDidMount() {
+		this.getSubjects();
+	}
 
-render(){
-	return (
-		<div>
+	render() {
+		return (
 			<div>
-			<h1> This is the admin Homepage </h1>
-			</div>
-		<button type="button" className={styles.theButton}>Notifications </button>
+				<div>
+					<h1> Admin Homepage </h1>
+				</div>
+				<button type="button" className={styles.theButton}>Notifications </button>
 
-		{(this.state.subjects.length > 0 && <SubjectList subjects={this.state.subjects}/>) 
-		|| (this.state.subjects.length < 1 && <h4>No subjects currently exist, you can create subjects via the "Create a subject" page</h4>)}
-		</div>
-	)
-}
-	
+				{(this.state.subjects.length > 0 && <SubjectList subjects={this.state.subjects} />)
+					|| (this.state.subjects.length < 1 && <h4>No subjects currently exist, you can create subjects via the "Create a subject" page</h4>)}
+			</div>
+		)
+	}
+
 }
 
 

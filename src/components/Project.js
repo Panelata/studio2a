@@ -7,31 +7,34 @@ class Project extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		  count: 0
+			count: 0
 		};
-	  }
+	}
 
-	render(){
-	const{ projectID, projectName} = this.props.survey;
-	const userType = auth.getUserType();
+	render() {
+		const { subjectName } = this.props;
+		const { projectID, projectName, size: projectSize } = this.props.survey;
+		const userType = auth.getUserType();
 
-		return(
+		return (
 			<tr>
-				<td style= {{textAlign: "center"}}>{projectID}</td>
+				<td style={{ textAlign: "center" }}>{projectID}</td>
 				<td> {projectName} </td>
-				<td>{(userType === "student" && 				
+				<td>{(userType === "student" &&
 					<Link to={{
-					pathname: "/student/class/project",
-					projectID: projectID,
-					projectName: projectName
-					}}>View Projects</Link>)
-					
-					|| (userType === "admin" && 				
-					<Link to={{
-					pathname: "/admin/project",
-					projectID: projectID,
-					projectName: projectName
-					}}>View Projects</Link>)}
+						pathname: "/student/class/project",
+						projectID: projectID,
+						projectName: projectName
+					}}>View Project</Link>)
+
+					|| (userType === "admin" &&
+						<Link to={{
+							pathname: "/admin/class/manage-project",
+							projectID: projectID,
+							projectName: projectName,
+							subjectName: subjectName,
+							projectSize: projectSize
+						}}>Manage Project</Link>)}
 				</td>
 			</tr>
 		);

@@ -10,18 +10,26 @@ const AdminClass = (props) => {
 		<div>
 			<div>
 				<h2>
-					Welcome To {subjectName}
+					{subjectName}
 				</h2>
 				<br></br><br></br>
 			</div>
 
 			<div className={styles.boxcontainer}>
-					<div className={styles.box1}> <Link to={{
-						pathname: "/admin/class/project",
+				<div className={styles.box1}> <Link to={{
+					pathname: "/admin/class/create-project",
+					subjectName: subjectName,
+					subjectID: props.location.subjectID
+				}}>Create a new Project</Link></div>
+				<div className={styles.box2}>
+					<Link to={{
+						pathname: "/admin/class/projects",
 						subjectName: subjectName,
 						subjectID: props.location.subjectID
-					}}> Create Project</Link></div>
-					<div className={styles.box2}> Manage Groups </div>
+					}}>
+						Manage Projects
+					</Link>
+				</div>
 			</div>
 
 		</div>

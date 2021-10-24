@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Footer from './footer';
+// import Footer from './footer';
 import Header from './header';
 
 const Layout = ({children}) => {
@@ -7,7 +7,7 @@ const Layout = ({children}) => {
 		<Fragment>
 			<Header />
 			{children}
-			<Footer />
+			{/* <Footer /> */}
 		</Fragment>
 	)
 }

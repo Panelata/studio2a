@@ -5,6 +5,7 @@ import './SubjectListStyle.css'
 class ProjectList extends Component {
 	render(){
 		const surveys = this.props.surveys;
+		const subjectName = this.props.subjectName;
 		return (
 			<div className= "data" >
 				<table className="ui celled table" id="subjects">
@@ -18,7 +19,7 @@ class ProjectList extends Component {
 
 					<tbody>
 						{surveys.map(survey => {
-								return <Project survey={survey} key={survey.projectID} />;		
+								return <Project subjectName={subjectName} survey={survey} key={survey.projectID} />;		
 							})}
 					</tbody>
 				</table>
