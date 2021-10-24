@@ -1,5 +1,5 @@
 
-export default function (data) {
+export default async function (data) {
 	let mergedData = [];
 	data.forEach(user => {
 		data.forEach(row => {
@@ -13,5 +13,6 @@ export default function (data) {
 			};
 		});
 	});
+	console.log("mergedData", mergedData)
 	return mergedData;
 };
