@@ -72,9 +72,6 @@ const Login = (props) => {
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
-        backgroundImage:
-          'url("https://ok8static.oktacdn.com/fs/bco/7/fs092kz503qXkTkn73l6")',
-        backgroundSize: "100%",
       }}
     >
       <Card sx={{ width: 350, paddingTop: 5, paddingBottom: 5 }}>
