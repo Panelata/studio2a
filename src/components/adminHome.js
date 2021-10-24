@@ -44,7 +44,7 @@ class AdminHome extends Component {
       >
         <Card
           sx={{
-            width: "100vh",
+            width: "90vh",
             height: "100vh",
             paddingTop: 5,
             paddingBottom: 5,
