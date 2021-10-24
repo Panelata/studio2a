@@ -7,7 +7,6 @@ class Auth {
   constructor() {
     this.authenticated = false;
     this.userType = "";
-    this.userID = 0;
   }
 
   //Handles Login
@@ -24,12 +23,8 @@ class Auth {
       })
       .then((data) => {
         if (data.success) {
-          console.log("USER ID");
-          console.log(data.userID);
-
           this.authenticated = true;
           this.userType = data.userType;
-          this.userID = data.userID;
           sessionStorage.setItem("sessionToken", data.token);
           if (login[2]) {
             localStorage.setItem("token", data.token);
@@ -78,10 +73,6 @@ class Auth {
   //Returns user type
   getUserType() {
     return this.userType;
-  }
-
-  getUserID() {
-    return this.userID;
   }
 
   //Returns authenticated state

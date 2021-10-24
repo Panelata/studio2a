@@ -54,20 +54,17 @@ const renderStudentHeader = () => {
         paddingBottom: "100",
       }}
     >
-      <AppBar
-        position="static"
-        style={{ background: "#adcdf0", padding: "10px" }}
-      >
-        <Toolbar>
-          <Button
-            variant="contained"
-            sx={{
-              background: "#90b6e0",
-              width: "100%",
-            }}
-          >
-            {/* TODO: shouldn't need margin here, fix later by centering */}
-            <NavLink to="/student-home">View your classes</NavLink>
+      <AppBar position="static" style={{ padding: "10px" }}>
+        <Toolbar
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            paddingBottom: "100",
+          }}
+        >
+          <Button component={NavLink} to="/student-home">
+            <Typography sx={{ color: "#ffffff" }}>View your classes</Typography>
           </Button>
         </Toolbar>
       </AppBar>
