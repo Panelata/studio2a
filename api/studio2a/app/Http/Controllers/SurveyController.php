@@ -111,4 +111,25 @@ class SurveyController extends Controller
 
         return response()->json($students);
     }
+
+
+    public function retrieveResponses(Request $request)
+    //returns all responses based on a the project Id
+    // eg: survey/responses?projectId=1
+
+    {
+        Log::debug("retrieving Survey Responses...");
+        $students = User::all();
+        $response['success'] = true;
+        $response['status'] = 200;
+
+        if ($request->has('projectID')) {
+            $students = DB::select('SELECT lev.userID, lev.score, map.mappingID, map.skills
+            FROM skill_level as lev, skills_mapping as map
+            WHERE lev.mappingID = map.mappingID AND map.projectID = ?
+            ORDER BY lev.userID', [$request->projectID]);
+        }
+
+        return response()->json($students);
+    }
 }

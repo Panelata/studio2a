@@ -32,6 +32,7 @@ $router->post('survey', 'SurveyController@createSurvey');
 $router->get('survey/retrieve', 'SurveyController@retrieveSurvey');
 $router->get('survey/skills', 'SurveyController@retrieveSkills');
 $router->get('survey/students', 'SurveyController@retrieveStudents');
+$router->get('survey/responses', 'SurveyController@retrieveResponses');
 
 
 //class endpoints

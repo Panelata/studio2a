@@ -4,6 +4,7 @@ import kmeans from "node-kmeans";
 import { Layer } from "grommet";
 import axios from "axios";
 import FormatGroupResponse from '../Utils/FormatGroupResponse';
+import MergeSurveyResponses from '../Utils/MergeSurveyResponses';
 
 const data = [
 	{ 'fistName': 'Tobias Snyder', 'preference-a': 1, 'preference-b': 100 },
@@ -62,9 +63,17 @@ const SaveGroups = async ({ projectID, groups }) => {
 	} catch (err) {
 		console.error(err);
 	}
-
 }
 
+const GetSurveyResults = async (projectID) => {
+	try {
+		let res = await axios.get(`http://127.0.0.1:8000/survey/responses?projectID=${projectID}`);
+		console.log("GetSurveyResults Response", res);
+		MergeSurveyResponses(res.data);
+	} catch (err) {
+		console.error(err);
+	}
+}
 
 const AdminManageGroups = (props) => {
 	const [groups, setGroups] = useState([])
@@ -84,7 +93,11 @@ const AdminManageGroups = (props) => {
 				setGroups(FormatGroupsData(res));
 			};
 		});
-		await setIsSettingGroups(false);
+		setIsSettingGroups(false);
+	}
+
+	const GenerateGroups = async () => {
+		GetSurveyResults(projectID)
 	}
 
 	const toggleShowGroups = () => {
@@ -117,7 +130,6 @@ const AdminManageGroups = (props) => {
 		console.log("Students", students);
 	};
 
-
 	//Called on initial mount
 	React.useEffect(() => {
 		getGroups();
@@ -136,7 +148,7 @@ const AdminManageGroups = (props) => {
 					<button className={styles.btn} disabled={!groups || groups.length == 0} onClick={toggleShowGroups}>View all groups</button>
 				</div>
 				<div className={styles.column}>
-					<button className={styles.btn} onClick={callCluster}>Generate Groups</button>
+					<button className={styles.btn} onClick={GenerateGroups}>Generate Groups</button>
 					<button className={styles.btn} >Generate Groups Randomly</button>
 				</div>
 			</div>
