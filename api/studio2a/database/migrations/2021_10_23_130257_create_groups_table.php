@@ -13,7 +13,7 @@ class CreateGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('proj_groups', function (Blueprint $table) {
             $table->bigIncrements('groupID');
             $table->integer('projectID');
         });

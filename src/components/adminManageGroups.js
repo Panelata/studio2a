@@ -72,10 +72,10 @@ const AdminManageGroups = (props) => {
 	}
 
 
-	// const getGroups = async () => {
-	// 	let groups = await axios.get(`http://127.0.0.1:8000/groups/retrieve?projectId=${projectID}`);
-	// 	console.log("Groups:", groups);
-	// };
+	const getGroups = async () => {
+		let groups = await axios.get(`http://127.0.0.1:8000/groups/retrieve?projectID=${projectID}`);
+		console.log("Groups:", groups);
+	};
 
 	const getStudents = async () => {
 		console.log("Get Students called!")
@@ -86,7 +86,7 @@ const AdminManageGroups = (props) => {
 
 	//Called on initial mount
 	React.useEffect(() => {
-		// getGroups();
+		getGroups();
 		getStudents();
 	}, []);
 
