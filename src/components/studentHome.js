@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import SubjectList from "./SubjectList";
 
-
 class StudentHome extends Component {
 
 	state = {

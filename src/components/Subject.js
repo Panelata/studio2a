@@ -28,14 +28,14 @@ class Subject extends Component {
 					pathname: "/student/class",
 					subjectName: subjectName,
 					subjectID: subjectID
-					}}>View Subject</Link>)
+					}}>View Projects</Link>)
 					
 					|| (userType === "admin" && 				
 					<Link to={{
 					pathname: "/admin/class",
 					subjectName: subjectName,
 					subjectID: subjectID
-					}}>View Subject</Link>)}
+					}}>View Projects</Link>)}
 			
 				</td>
 			</tr>

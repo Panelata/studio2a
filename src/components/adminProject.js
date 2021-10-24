@@ -9,7 +9,8 @@ import styles from "./adminProject.module.css"
     const [projectName, setProjectName] = React.useState('');
     const [size, setSize] = React.useState('');
     const [skills, setSkills] = React.useState([]);
-    
+    const [skillInput, setSkillInput] = React.useState('');
+
     React.useEffect(()=>{
         console.log(props);
     },[]);
@@ -32,7 +33,9 @@ import styles from "./adminProject.module.css"
             body: JSON.stringify({
                 projectName: projectName,
                 size: size,
-                skills: skills
+                skills: skills,
+                subjectID: props.location.subjectID
+
             })
         })
         .then(response => {
@@ -53,6 +56,7 @@ import styles from "./adminProject.module.css"
             <br/>
             <input className={styles.input} type="text" onChange={(ev)=>setProjectName(ev.target.value)} />
             <br/>
+            <br/>
             <label>Group Size</label>
             <br/>
             <input className={styles.input} type="number" onChange={(ev)=>setSize(ev.target.value)} />
@@ -60,20 +64,16 @@ import styles from "./adminProject.module.css"
                 skills.map((skill, key) => 
                     <div key={key}>
                       <p>{skill}</p>
-                      <button className={styles.removeButton} onClick={()=>{removeSkill(skill)}}>Remove</button>
+                      <button className={styles.smallButton} onClick={()=>{removeSkill(skill)}}>Remove</button>
                     </div>
                 )
             }
             <br/>
             <label>Add Skill</label>
             <br/>
-            <select className={styles.selectSkillMenu} onChange={(ev)=>addSkill(ev.target.value)}>
-                    <option hidden>Select Skill</option>
-                    <option>Skill 1</option>
-                    <option>Skill 2</option>
-                    <option>Skill 3</option>
-                    <option>Skill 4</option>
-            </select> 
+            <input className={styles.input} type="text" onChange={event => setSkillInput(event.target.value)} />
+            <br/>
+            <button className={styles.smallButton} onClick={(ev)=>addSkill(skillInput)}>Add Skill</button>
             <br/>
             <button className={styles.uploadButton} onClick={uploadSurvey}>Upload Survey</button>
          </div>

@@ -12,7 +12,7 @@ class Survey extends Model
     public $timestamps = false;
 
     protected $filalble = [
-        'projectName', 'size'
+        'projectName', 'size', 'subjectID'
     ];
 
     protected $hidden = [
