@@ -5,6 +5,7 @@ import auth from "../auth";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 
 const renderAdminHeader = () => {
@@ -17,33 +18,25 @@ const renderAdminHeader = () => {
         paddingBottom: "100",
       }}
     >
-      <AppBar
-        position="static"
-        style={{ background: "#adcdf0", padding: "10px" }}
-      >
-        <Toolbar>
-          <Button
-            variant="contained"
-            sx={{
-              marginRight: "400px",
-              background: "#90b6e0",
-              width: "200%",
-            }}
-          >
-            {/* TODO: shouldn't need margin here, fix later by centering */}
-            <NavLink to="/admin-home">View all Classes</NavLink>
+      <AppBar position="static" style={{ padding: "10px" }}>
+        <Toolbar
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingBottom: "100",
+          }}
+        >
+          <Button component={NavLink} to="/admin-home">
+            <Typography sx={{ color: "#ffffff" }}>View all Classes</Typography>
           </Button>
-          <Button
-            variant="contained"
-            sx={{ marginRight: "400px", background: "#90b6e0", width: "250%" }}
-          >
-            <NavLink to="/admin/register">Register a student</NavLink>
+          <Button component={NavLink} to="/admin/register">
+            <Typography sx={{ color: "#ffffff" }}>
+              Register a student
+            </Typography>
           </Button>
-          <Button
-            variant="contained"
-            sx={{ background: "#90b6e0", width: "200%" }}
-          >
-            <NavLink to="admin/class/create">Create a Subject</NavLink>
+          <Button component={NavLink} to="admin/class/create">
+            <Typography sx={{ color: "#ffffff" }}>Create a Subject</Typography>
           </Button>
         </Toolbar>
       </AppBar>

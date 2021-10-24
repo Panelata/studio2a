@@ -6,38 +6,38 @@
 class Auth {
   constructor() {
     this.authenticated = false;
-    this.userType = '';
+    this.userType = "";
     this.userID = 0;
   }
 
   //Handles Login
   login(login, cb) {
-    fetch('http://127.0.0.1:8000/login', {
-      method: 'POST',
+    fetch("http://127.0.0.1:8000/login", {
+      method: "POST",
       body: JSON.stringify({
         username: login[0],
-        password: login[1]
-      })
+        password: login[1],
+      }),
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         if (data.success) {
-          console.log('USER ID')
-          console.log(data.userID)
+          console.log("USER ID");
+          console.log(data.userID);
 
           this.authenticated = true;
           this.userType = data.userType;
           this.userID = data.userID;
-          sessionStorage.setItem('sessionToken', data.token);
+          sessionStorage.setItem("sessionToken", data.token);
           if (login[2]) {
-            localStorage.setItem('token', data.token);
+            localStorage.setItem("token", data.token);
           }
           cb(true);
         } else {
           this.authenticated = false;
-          this.userType = '';
+          this.userType = "";
           cb(false);
         }
       });
@@ -45,32 +45,32 @@ class Auth {
 
   //Register new user
   register(userDetails, cb) {
-    fetch('http://127.0.0.1:8000/register', {
-      method: 'POST',
+    fetch("http://127.0.0.1:8000/register", {
+      method: "POST",
       body: JSON.stringify({
         firstName: userDetails[0],
         lastName: userDetails[1],
         email: userDetails[2],
         username: userDetails[3],
         password: userDetails[4],
-        userType: userDetails[5]
-      })
+        userType: userDetails[5],
+      }),
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         if (data.success) {
           cb(true);
         } else {
           cb(false, data.message);
         }
-      })
+      });
   }
 
   logout() {
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     this.authenticated = false;
     this.userType = false;
   }
