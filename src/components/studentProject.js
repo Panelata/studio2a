@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import styles from "./studentProject.module.css"
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import StudentShowGroups from './studentShowGroups';
 
 class StudentProject extends Component {
 
@@ -28,6 +29,7 @@ class StudentProject extends Component {
 						</div>
 					</div>
 				</div>
+				<StudentShowGroups projectID={this.props.location.projectID} />
 			</div>
 		)
 	}
