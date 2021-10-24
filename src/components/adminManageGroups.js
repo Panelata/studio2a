@@ -46,7 +46,7 @@ function FormatGroupsData(groups) {
  * Saves groups to the database: creates a group row and add the students to that group row
  * @param {int} projectID - The id of the project being used
  * @param {int[][]} groups - Array of arrays of users
- * @param {int[]} group - Array of users
+ * @param {int[]} group - Array of userIDs
  * @param {int} userID - User id to add to the group
  */
 const SaveGroups = async ({ projectID, groups }) => {
@@ -72,13 +72,13 @@ const AdminManageGroups = (props) => {
 	const [showGroups, setShowGroups] = useState(false);
 	const [students, setStudents] = useState([]);
 	const [showStudents, setShowStudents] = useState(false);
-	const { subjectName, projectID, projectName } = props.location;
+	const { subjectName, projectID, projectName, projectSize } = props.location;
 
 	const callCluster = async () => {
 		if (isSettingGroups) return "";
 		setIsSettingGroups(true);
-
-		kmeans.clusterize(vectors, { k: 3 }, (err, res) => {
+		console.log(vectors)
+		kmeans.clusterize(vectors, { k: projectSize }, (err, res) => {
 			if (err) console.error(err);
 			else {
 				setGroups(FormatGroupsData(res));
@@ -137,7 +137,7 @@ const AdminManageGroups = (props) => {
 				</div>
 				<div className={styles.column}>
 					<button className={styles.btn} onClick={callCluster}>Generate Groups</button>
-					<button className={styles.btn}>Generate Groups Randomly</button>
+					<button className={styles.btn} >Generate Groups Randomly</button>
 				</div>
 			</div>
 			{showStudents && (

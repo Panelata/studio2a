@@ -13,7 +13,7 @@ class Project extends Component {
 
 	render() {
 		const { subjectName } = this.props;
-		const { projectID, projectName } = this.props.survey;
+		const { projectID, projectName, size: projectSize } = this.props.survey;
 		const userType = auth.getUserType();
 
 		return (
@@ -32,7 +32,8 @@ class Project extends Component {
 							pathname: "/admin/class/manage-project",
 							projectID: projectID,
 							projectName: projectName,
-							subjectName: subjectName
+							subjectName: subjectName,
+							projectSize: projectSize
 						}}>Manage Project</Link>)}
 				</td>
 			</tr>

@@ -10,8 +10,7 @@ export default function (data) {
 	// I am then converting that into an array of groups with an array of students inside each group
 	let extractedGroups = []
 	data.forEach(student => {
-		let getGroupNum = (element) => element.hasOwnProperty(`${student.groupID}`);
-		let groupNum = extractedGroups.findIndex(getGroupNum);
+		let groupNum = extractedGroups.findIndex((element) => element.hasOwnProperty(`${student.groupID}`));
 		if (groupNum == -1) {
 			let key = `${student.groupID}`;
 			let newGroup = {};
