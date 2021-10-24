@@ -9,7 +9,7 @@
 }
 
 .column {
-	min-height: 500px;
+	min-height: 360px;
 	width: max-content;
 	min-width: 40%;
 	display: flex;
@@ -44,6 +44,6 @@ button:disabled {
 
 .link {
 	color: white;
-	font-size: 30px;
+	/* font-size: 30px; */
 	text-decoration: none;
 }
