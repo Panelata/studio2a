@@ -9,7 +9,7 @@ import Card from "@mui/material/Card";
 class AdminHome extends Component {
   state = {
     subjects: [],
-    url: "http://127.0.0.1:8000/subject/retrievesadsadasdas",
+    url: "http://127.0.0.1:8000/subject/retrieve",
   };
   getSubjects = async () => {
     let subjects;
@@ -24,7 +24,6 @@ class AdminHome extends Component {
         { subjectID: 4, subjectName: "Programming 1" },
       ];
     }
-
     this.setState({ subjects });
   };
 

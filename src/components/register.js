@@ -52,6 +52,7 @@ const Register = () => {
         <form onSubmit={(ev) => register(ev)}>
           <label>First Name</label>
           <input
+            className="registerInput"
             required
             type="text"
             onChange={(ev) => setFirstName(ev.target.value)}
@@ -59,6 +60,7 @@ const Register = () => {
 
           <label>Last Name</label>
           <input
+            className="registerInput"
             required
             type="text"
             onChange={(ev) => setLastName(ev.target.value)}
@@ -66,6 +68,7 @@ const Register = () => {
 
           <label>Email</label>
           <input
+            className="registerInput"
             required
             type="text"
             onChange={(ev) => setEmail(ev.target.value)}
@@ -73,6 +76,7 @@ const Register = () => {
 
           <label>Username</label>
           <input
+            className="registerInput"
             required
             type="text"
             onChange={(ev) => setUsername(ev.target.value)}
@@ -80,6 +84,7 @@ const Register = () => {
 
           <label>Password</label>
           <input
+            className="registerInput"
             required
             type="password"
             onChange={(ev) => setPassword(ev.target.value)}

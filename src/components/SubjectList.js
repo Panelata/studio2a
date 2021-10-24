@@ -6,7 +6,7 @@ class SubjectList extends Component {
 	render(){
 		const subjects = this.props.subjects;
 		return (
-			<div className= "data" >
+			<div style={{marginBottom:"30px"}} className= "data" >
 				<table className="ui celled table" id="subjects">
 					<thead>
 						<tr>

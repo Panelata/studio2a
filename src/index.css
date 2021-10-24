@@ -1,11 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
 * {
   margin: 0;
   padding: 0;
 }
 
-html{
+html {
   width: 100%;
   height: 100%;
   max-width: 100vw;
@@ -20,6 +19,11 @@ body {
   height: 100%;
   background-image: url("https://ok8static.oktacdn.com/fs/bco/7/fs092kz503qXkTkn73l6");
   background-size: 100%;
+  
+  min-height: 100vh;
+  /* background-color: #C2DCF2;
+  width: 100%; */
+
 }
 
 code {
