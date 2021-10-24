@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import SubjectList from "./SubjectList";
-import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 
 class AdminHome extends Component {
@@ -53,7 +53,7 @@ class AdminHome extends Component {
           <div>
             <h1> Admin Homepage </h1>
           </div>
-          <button type="button">Notifications </button>
+          <Button>Notifications</Button>
 
           {(this.state.subjects.length > 0 && (
             <SubjectList subjects={this.state.subjects} />

@@ -56,7 +56,7 @@ const renderStudentHeader = () => {
     <div
       style={{
         display: "flex",
-        justifyContent: "space-evenly",
+        justifyContent: "center",
         alignItems: "flex-start",
         paddingBottom: "100",
       }}
@@ -69,9 +69,8 @@ const renderStudentHeader = () => {
           <Button
             variant="contained"
             sx={{
-              marginRight: "400px",
               background: "#90b6e0",
-              width: "200%",
+              width: "100%",
             }}
           >
             {/* TODO: shouldn't need margin here, fix later by centering */}
