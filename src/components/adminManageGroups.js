@@ -3,28 +3,29 @@ import styles from "./adminManageGroups.module.css";
 import kmeans from "node-kmeans";
 import { Layer } from "grommet";
 import axios from "axios";
+import FormatGroupResponse from '../Utils/FormatGroupResponse';
 
 const data = [
-	{ 'name': 'Tobias Snyder', 'preference-a': 1, 'preference-b': 100 },
-	{ 'name': 'Brandon Richards', 'preference-a': 2, 'preference-b': 200 },
-	{ 'name': 'Samanta Maldonado', 'preference-a': 3, 'preference-b': 300 },
-	{ 'name': 'Faiza Rose', 'preference-a': 4, 'preference-b': 400 },
-	{ 'name': 'Zephaniah Wang', 'preference-a': 5, 'preference-b': 200 },
-	{ 'name': 'Willis Partridge', 'preference-a': 1, 'preference-b': 8700 },
-	{ 'name': 'Shannan George', 'preference-a': 2, 'preference-b': 60420 },
-	{ 'name': 'Ishika Dominguez', 'preference-a': 3, 'preference-b': 98787 },
-	{ 'name': 'Thelma Summers', 'preference-a': 4, 'preference-b': 716 },
-	{ 'name': 'Carlie Irving', 'preference-a': 5, 'preference-b': 11567 },
-	{ 'name': 'Lilly-Mai Barber', 'preference-a': 1, 'preference-b': 6426 },
-	{ 'name': 'Osman Tate', 'preference-a': 2, 'preference-b': 8700 },
-	{ 'name': 'Annaliese Coulson', 'preference-a': 3, 'preference-b': 60420 },
-	{ 'name': 'Kaan Mcleod', 'preference-a': 3, 'preference-b': 98787 },
-	{ 'name': 'Constance Ho', 'preference-a': 4, 'preference-b': 716 },
-	{ 'name': 'Saanvi French', 'preference-a': 5, 'preference-b': 11567 },
-	{ 'name': 'Igor Wicks', 'preference-a': 1, 'preference-b': 6426 },
-	{ 'name': 'Scott Devine', 'preference-a': 2, 'preference-b': 8700 },
-	{ 'name': 'Elora King', 'preference-a': 3, 'preference-b': 8700 },
-	{ 'name': 'Mylie Sheehan', 'preference-a': 4, 'preference-b': 8700 },
+	{ 'fistName': 'Tobias Snyder', 'preference-a': 1, 'preference-b': 100 },
+	{ 'fistName': 'Brandon Richards', 'preference-a': 2, 'preference-b': 200 },
+	{ 'fistName': 'Samanta Maldonado', 'preference-a': 3, 'preference-b': 300 },
+	{ 'fistName': 'Faiza Rose', 'preference-a': 4, 'preference-b': 400 },
+	{ 'fistName': 'Zephaniah Wang', 'preference-a': 5, 'preference-b': 200 },
+	{ 'fistName': 'Willis Partridge', 'preference-a': 1, 'preference-b': 8700 },
+	{ 'fistName': 'Shannan George', 'preference-a': 2, 'preference-b': 60420 },
+	{ 'fistName': 'Ishika Dominguez', 'preference-a': 3, 'preference-b': 98787 },
+	{ 'fistName': 'Thelma Summers', 'preference-a': 4, 'preference-b': 716 },
+	{ 'fistName': 'Carlie Irving', 'preference-a': 5, 'preference-b': 11567 },
+	{ 'fistName': 'Lilly-Mai Barber', 'preference-a': 1, 'preference-b': 6426 },
+	{ 'fistName': 'Osman Tate', 'preference-a': 2, 'preference-b': 8700 },
+	{ 'fistName': 'Annaliese Coulson', 'preference-a': 3, 'preference-b': 60420 },
+	{ 'fistName': 'Kaan Mcleod', 'preference-a': 3, 'preference-b': 98787 },
+	{ 'fistName': 'Constance Ho', 'preference-a': 4, 'preference-b': 716 },
+	{ 'fistName': 'Saanvi French', 'preference-a': 5, 'preference-b': 11567 },
+	{ 'fistName': 'Igor Wicks', 'preference-a': 1, 'preference-b': 6426 },
+	{ 'fistName': 'Scott Devine', 'preference-a': 2, 'preference-b': 8700 },
+	{ 'fistName': 'Elora King', 'preference-a': 3, 'preference-b': 8700 },
+	{ 'fistName': 'Mylie Sheehan', 'preference-a': 4, 'preference-b': 8700 },
 ];
 
 let vectors = new Array();
@@ -41,6 +42,29 @@ function FormatGroupsData(groups) {
 	return formattedGroups;
 }
 
+/**
+ * Saves groups to the database: creates a group row and add the students to that group row
+ * @param {int} projectID - The id of the project being used
+ * @param {int[][]} groups - Array of arrays of users
+ * @param {int[]} group - Array of users
+ * @param {int} userID - User id to add to the group
+ */
+const SaveGroups = async ({ projectID, groups }) => {
+	try {
+		let res = await fetch('http://127.0.0.1:8000/groups/create', {
+			method: 'POST',
+			body: JSON.stringify({
+				projectID,
+				groups
+			})
+		})
+		console.log("Response", res);
+	} catch (err) {
+		console.error(err);
+	}
+
+}
+
 
 const AdminManageGroups = (props) => {
 	const [groups, setGroups] = useState([])
@@ -54,7 +78,7 @@ const AdminManageGroups = (props) => {
 		if (isSettingGroups) return "";
 		setIsSettingGroups(true);
 
-		kmeans.clusterize(vectors, { k: 10 }, (err, res) => {
+		kmeans.clusterize(vectors, { k: 3 }, (err, res) => {
 			if (err) console.error(err);
 			else {
 				setGroups(FormatGroupsData(res));
@@ -72,17 +96,27 @@ const AdminManageGroups = (props) => {
 	}
 
 
+	/**
+	 * Returns the groups from the php endpoint in an array of objects. On the frontend we are then converting that to a groups array of users arrays
+	 */
 	const getGroups = async () => {
-		let groups = await axios.get(`http://127.0.0.1:8000/groups/retrieve?projectID=${projectID}`);
-		console.log("Groups:", groups);
+		try {
+			let { data } = await axios.get(`http://127.0.0.1:8000/groups/retrieve?projectID=${projectID}`);
+			let formattedGroups = FormatGroupResponse(data);
+			setGroups(formattedGroups);
+		} catch (error) {
+			console.log("Error in getGroups");
+			console.error(error);
+		}
 	};
 
 	const getStudents = async () => {
 		console.log("Get Students called!")
 		let { data: students } = await axios.get(`http://127.0.0.1:8000/survey/students?projectID=${projectID}`);
 		students && setStudents(students);
-		console.log(students);
+		console.log("Students", students);
 	};
+
 
 	//Called on initial mount
 	React.useEffect(() => {
@@ -137,7 +171,7 @@ const AdminManageGroups = (props) => {
 							<div style={{ textDecoration: "underline", fontWeight: "bold" }}>Group {i + 1}</div>
 							{group.map((student, index) =>
 								<div key={index} style={{ display: "flex", flexDirection: "row" }}>
-									<div>{student.name}</div>
+									<div>{student.firstName} {student.lastName}</div>
 								</div>
 							)}
 						</div>
