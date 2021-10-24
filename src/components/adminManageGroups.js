@@ -69,9 +69,10 @@ const GetSurveyResults = async (projectID) => {
 	try {
 		let res = await axios.get(`http://127.0.0.1:8000/survey/responses?projectID=${projectID}`);
 		console.log("GetSurveyResults Response", res);
-		MergeSurveyResponses(res.data);
+		return MergeSurveyResponses(res.data);
 	} catch (err) {
 		console.error(err);
+		return [];
 	}
 }
 
@@ -97,7 +98,8 @@ const AdminManageGroups = (props) => {
 	}
 
 	const GenerateGroups = async () => {
-		GetSurveyResults(projectID)
+		let surveyResponses = await GetSurveyResults(projectID)
+		console.log("SurveyResponses", surveyResponses);
 	}
 
 	const toggleShowGroups = () => {
