@@ -35,7 +35,7 @@ const renderAdminHeader = () => {
               Register a student
             </Typography>
           </Button>
-          <Button component={NavLink} to="admin/class/create">
+          <Button component={NavLink} to="/admin/class/create">
             <Typography sx={{ color: "#ffffff" }}>Create a Subject</Typography>
           </Button>
         </Toolbar>
