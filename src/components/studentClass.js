@@ -1,75 +1,55 @@
-import React from 'react';
-import styles from "./studentClass.module.css";
+//To save time lets just hard code the skills
 
+import React, { Component } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from "axios";
+import ProjectList from './ProjectList';
+import Card from "@mui/material/Card";
 
-// TODO: update api functions for the GetSurvey and GetGroup to actually return data, currently they are just returning bools
+class StudentClass extends Component {
 
-/**
- * Attempts to fetch a survey from the db and return whether it is true or not  
- * @param {string} subjectName The identifier for the subject being fetched
- * @returns boolean value as to whether there is a survey available for that subject for that student 
- */
-const GetSurvey = async (subjectName) => {
-	try {
-		const surveyFetch = await fetch('http://127.0.0.1:8000/surveys', {
-			method: 'POST',
-			body: JSON.stringify({
-				subjectName,
-			})
-		})
+    state = {
+        surveys: [],
+        url: "http://127.0.0.1:8000/survey/retrieve?subjectID=" + String(this.props.location.subjectID)
+    }
 
-		return !!surveyFetch; //returns a boolean depending on results
+    getSurveys = async () => {
+        const surveys = await axios.get(this.state.url);
+        this.setState({ surveys: surveys.data });
+    }
 
-	} catch (error) {
-		console.error(error);
-		return false;
-	}
-}
+    componentDidMount() {
+        this.getSurveys();
+    }
 
-/**
- * Gets the student's group  and returns a bool for if the student is assigned a group
- * @param {string} subjectName The identifier for the subject being fetched
- * @param {string} studentId The identifier for the student's group being fetched
- * @returns boolean value as to whether there is a group for that student forthe subject
- */
-const GetGroup = async (subjectName, studentId = "student1") => {
-	try {
-		const groupFetch = await fetch('http://127.0.0.1:8000/groups', {
-			method: 'POST',
-			body: JSON.stringify({
-				subjectName,
-				studentId
-			})
-		})
-
-		return !!groupFetch; //returns a boolean depending on results
-
-	} catch (error) {
-		console.error(error);
-		return false;
-	}
-}
-
-const StudentClass = (props) => {
-	const { subjectName } = props.location;
-	const surveyAvailable = GetSurvey(subjectName);
-	const assignedGroup = GetGroup(subjectName);
-
-	return (
-		<div>
-			<h1>Welcome to {subjectName}</h1>
-			<div className={styles.options}>
-				<div className={styles.column}>
-					{/* TODO: flip disabled prop for enrolled group once backend is setup (should be disable if a group doesn't exist) */}
-					<button className={styles.btn} disabled={assignedGroup}>View enrolled group</button>
-					<button className={styles.btn}>View all groups</button>
-				</div>
-				<div className={styles.column}>
-					<button className={styles.btn} disabled={!surveyAvailable}>Take the survey to assign yourself to a group</button>
-				</div>
-			</div>
-		</div>
-	)
+    render() {
+        return (
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    // alignItems: "center",
+                    height: "100vh",
+                }}
+            >
+                <Card
+                    sx={{
+                        width: "90vh",
+                        height: "100vh",
+                        paddingTop: 5,
+                        paddingBottom: 5,
+                    }}
+                    className="card"
+                >
+                    <div>
+                        <h1 style={{marginBottom:"20px"}}> {this.props.location.subjectName} > View Projects </h1>
+                        {(this.state.surveys.length > 0 && <ProjectList surveys={this.state.surveys} />)
+                            || (this.state.surveys.length < 1 && <h4> No Projects Available</h4>)}
+                    </div>
+                </Card>
+            </div>
+        )
+    }
 }
 
 export default StudentClass;

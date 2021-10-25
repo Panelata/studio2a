@@ -1,45 +1,73 @@
-import React from 'react';
-import styles from "./adminHome.module.css"
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+// import styles from "./adminHome.module.css";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import SubjectList from "./SubjectList";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
 
-const AdminHome = () => {
-	return (
-		<div>
-			<h1> This is the admin Homepage </h1>
+class AdminHome extends Component {
+  state = {
+    subjects: [],
+    url: "http://127.0.0.1:8000/subject/retrieve",
+  };
+  getSubjects = async () => {
+    let subjects;
+    try {
+      let { data } = await axios.get(this.state.url);
+      subjects = data;
+    } catch {
+      subjects = [
+        { subjectID: 1, subjectName: "SES1a" },
+        { subjectID: 2, subjectName: "SES1b" },
+        { subjectID: 3, subjectName: "Data Structures" },
+        { subjectID: 4, subjectName: "Programming 1" },
+      ];
+    }
+    this.setState({ subjects });
+  };
 
-			<div>
-				<button type="button" className={styles.theButton}>Notifications </button>
-			</div>
+  componentDidMount() {
+    this.getSubjects();
+  }
 
-			<div className={styles.boxcontainer}>
-				<div className={styles.box1}> <Link to={{
-					pathname: "/admin/class",
-					subjectName: "Software Engineering Studio 1a",
-					subjectID: 1
-				}}>Software Engineering Studio 1a</Link></div>
-				<div className={styles.box2}>
-					<Link to={{
-						pathname: "/admin/class",
-						subjectName: "Software Engineering Studio 1b"
-					}}>Software Engineering Studio 1b</Link>
-				</div>
-				<div className={styles.box3}>
-					<Link to={{
-						pathname: "/admin/class",
-						subjectName: "Data Structures and Algorithms"
-					}}>Data Structures and Algorithms</Link>
-				</div>
-				<div className={styles.box4}>
-					<Link to={{
-						pathname: "/admin/class",
-						subjectName: "Programming Fundamentals"
-					}}>Programming Fundamentals</Link>
-				</div>
-			</div>
+  render() {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          // alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Card
+          sx={{
+            width: "90vh",
+            height: "100vh",
+            paddingTop: 5,
+            paddingBottom: 5,
+          }}
+          className="card"
+        >
+          <div>
+            <h1> Admin Homepage </h1>
+          </div>
+          <Button>Notifications</Button>
 
-
-		</div>
-	)
+          {(this.state.subjects.length > 0 && (
+            <SubjectList subjects={this.state.subjects} />
+          )) ||
+            (this.state.subjects.length < 1 && (
+              <h4>
+                No subjects currently exist, you can create subjects via the
+                "Create a subject" page
+              </h4>
+            ))}
+        </Card>
+      </div>
+    );
+  }
 }
 
 export default AdminHome;

@@ -4,12 +4,12 @@
 	gap: 20px;
 	width: 100vw;
 	max-width: 100%;
-	padding: 40px;
+	padding-top: 40px;
 	justify-content: center;
 }
 
 .column {
-	min-height: 500px;
+	min-height: 260px;
 	width: max-content;
 	min-width: 40%;
 	display: flex;

@@ -24,5 +24,22 @@ $router->post('register', 'LoginController@register');
 $router->post('login', 'LoginController@login');
 $router->post('login/token', 'LoginController@checkToken');
 
+//Skill_Level endpoints
+$router->post('skillLevel', 'SkillLevelController@createSkillLevel');
+
 //Survey Endpoints
 $router->post('survey', 'SurveyController@createSurvey');
+$router->get('survey/retrieve', 'SurveyController@retrieveSurvey');
+$router->get('survey/skills', 'SurveyController@retrieveSkills');
+$router->get('survey/students', 'SurveyController@retrieveStudents');
+$router->get('survey/responses', 'SurveyController@retrieveResponses');
+
+
+//class endpoints
+$router->post('subject/create', 'SubjectController@create');
+$router->get('subject/retrieve', 'SubjectController@retrieve');
+
+
+//group endpoints
+$router->post('groups/create', 'GroupController@create');
+$router->get('groups/retrieve', 'GroupController@retrieve');

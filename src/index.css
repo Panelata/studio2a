@@ -1,28 +1,39 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
 * {
   margin: 0;
   padding: 0;
 }
 
-html{
+html {
   width: 100%;
+  height: 100%;
   max-width: 100vw;
   overflow-x: hidden;
+  /* overflow-y: hidden; */
+    scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  background-image: url("https://ok8static.oktacdn.com/fs/bco/7/fs092kz503qXkTkn73l6");
+  background-size: 100%;
+  background-attachment: fixed;
+  
   min-height: 100vh;
-  background-color: #C2DCF2;
+  /* background-color: #C2DCF2;
+  width: 100%; */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-#root{
-  min-height: inherit;
+.card {
+  height: max-content !important;
+  margin-bottom:30px !important;
+  padding-bottom: 40px !important;
+  align-self: "start" !important;
 }
