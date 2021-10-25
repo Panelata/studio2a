@@ -5,42 +5,28 @@ import { Layer } from "grommet";
 import axios from "axios";
 import FormatGroupResponse from '../Utils/FormatGroupResponse';
 import MergeSurveyResponses from '../Utils/MergeSurveyResponses';
+import ArrangeGroups from '../Utils/ArrangeGroups';
 
-const data = [
-	{ 'fistName': 'Tobias Snyder', 'preference-a': 1, 'preference-b': 100 },
-	{ 'fistName': 'Brandon Richards', 'preference-a': 2, 'preference-b': 200 },
-	{ 'fistName': 'Samanta Maldonado', 'preference-a': 3, 'preference-b': 300 },
-	{ 'fistName': 'Faiza Rose', 'preference-a': 4, 'preference-b': 400 },
-	{ 'fistName': 'Zephaniah Wang', 'preference-a': 5, 'preference-b': 200 },
-	{ 'fistName': 'Willis Partridge', 'preference-a': 1, 'preference-b': 8700 },
-	{ 'fistName': 'Shannan George', 'preference-a': 2, 'preference-b': 60420 },
-	{ 'fistName': 'Ishika Dominguez', 'preference-a': 3, 'preference-b': 98787 },
-	{ 'fistName': 'Thelma Summers', 'preference-a': 4, 'preference-b': 716 },
-	{ 'fistName': 'Carlie Irving', 'preference-a': 5, 'preference-b': 11567 },
-	{ 'fistName': 'Lilly-Mai Barber', 'preference-a': 1, 'preference-b': 6426 },
-	{ 'fistName': 'Osman Tate', 'preference-a': 2, 'preference-b': 8700 },
-	{ 'fistName': 'Annaliese Coulson', 'preference-a': 3, 'preference-b': 60420 },
-	{ 'fistName': 'Kaan Mcleod', 'preference-a': 3, 'preference-b': 98787 },
-	{ 'fistName': 'Constance Ho', 'preference-a': 4, 'preference-b': 716 },
-	{ 'fistName': 'Saanvi French', 'preference-a': 5, 'preference-b': 11567 },
-	{ 'fistName': 'Igor Wicks', 'preference-a': 1, 'preference-b': 6426 },
-	{ 'fistName': 'Scott Devine', 'preference-a': 2, 'preference-b': 8700 },
-	{ 'fistName': 'Elora King', 'preference-a': 3, 'preference-b': 8700 },
-	{ 'fistName': 'Mylie Sheehan', 'preference-a': 4, 'preference-b': 8700 },
-];
 
-let vectors = new Array();
-for (let i = 0; i < data.length; i++) {
-	vectors[i] = [data[i]['preference-a'], data[i]['preference-b']];
-}
-
-function FormatGroupsData(groups) {
-	console.log("kmeans raw groups", groups)
-	let formattedGroups = groups.map(cluster =>
-		cluster.clusterInd.map(index => data[index])
-	);
-	console.log("Formatted Groups", formattedGroups)
-	return formattedGroups;
+function FormatGroupsData(rawClusters) {
+	// let dataGroups = rawClusters.map(cluster =>
+	// 	cluster.clusterInd.map(index => userSurveys[index])
+	// );
+	// console.log("Raw clusters", rawClusters)
+	let dataGroups = Array.apply(null, Array(rawClusters.length)).map(function () { return [] });
+	for (let i = 0; i < rawClusters.length; i++) {
+		let clusterIndex = rawClusters[i].clusterInd;
+		// console.log("cluster index", clusterIndex);
+		for (let u = 0; u < clusterIndex.length; u++) {
+			// console.log("Student in cluster:", userSurveys[clusterIndex[u]]);
+			dataGroups[i].push(clusterIndex[u]);
+		}
+		// .forEach(student => { dataGroups[i].push(userSurveys[student]) });
+	};
+	dataGroups.sort(function (a, b) { return b.length - a.length });
+	console.log(rawClusters)
+	console.log("datagroups", dataGroups)
+	return dataGroups;
 }
 
 /**
@@ -59,7 +45,6 @@ const SaveGroups = async ({ projectID, groups }) => {
 				groups
 			})
 		})
-		console.log("Response", res);
 	} catch (err) {
 		console.error(err);
 	}
@@ -68,10 +53,10 @@ const SaveGroups = async ({ projectID, groups }) => {
 const GetSurveyResults = async (projectID) => {
 	try {
 		let res = await axios.get(`http://127.0.0.1:8000/survey/responses?projectID=${projectID}`);
-		console.log("GetSurveyResults Response", res);
-		MergeSurveyResponses(res.data);
+		return MergeSurveyResponses(res.data);
 	} catch (err) {
 		console.error(err);
+		return [];
 	}
 }
 
@@ -81,23 +66,39 @@ const AdminManageGroups = (props) => {
 	const [showGroups, setShowGroups] = useState(false);
 	const [students, setStudents] = useState([]);
 	const [showStudents, setShowStudents] = useState(false);
+	const [userSurveys, setUserSurveys] = useState([]);
 	const { subjectName, projectID, projectName, projectSize } = props.location;
 
-	const callCluster = async () => {
+	const StartGenerateGroups = async () => {
 		if (isSettingGroups) return "";
 		setIsSettingGroups(true);
-		console.log(vectors)
-		kmeans.clusterize(vectors, { k: projectSize }, (err, res) => {
+		setUserSurveys(await GetSurveyResults(projectID))
+	}
+
+	const GenerateGroups = () => {
+		let vectors = new Array();
+		for (let i = 0; i < userSurveys.length; i++) {
+			vectors[i] = [userSurveys[i]['skillA'], userSurveys[i]['skillB']];
+		}
+		// numStudents/projectSize = numGoups
+		// however if we have a remainder do some other stuff.
+		let numClusters = () => {
+			let remainder = students.length % projectSize;
+			let baseNumGroups = students.length / projectSize;
+			if (remainder == 0) return baseNumGroups;
+			if (remainder < projectSize / 2) { return Math.floor(baseNumGroups) }
+			else { return Math.floor(baseNumGroups) + 1 }
+		};
+		kmeans.clusterize(vectors, { k: numClusters() }, async (err, res) => {
 			if (err) console.error(err);
 			else {
-				setGroups(FormatGroupsData(res));
+				let formattedGroups = await FormatGroupsData(res, userSurveys);
+				let idGroups = ArrangeGroups(formattedGroups, students.length, projectSize);
+				await SaveGroups({ projectID, groups: idGroups });
+				await getGroups();
 			};
 		});
 		setIsSettingGroups(false);
-	}
-
-	const GenerateGroups = async () => {
-		GetSurveyResults(projectID)
 	}
 
 	const toggleShowGroups = () => {
@@ -124,22 +125,28 @@ const AdminManageGroups = (props) => {
 	};
 
 	const getStudents = async () => {
-		console.log("Get Students called!")
 		let { data: students } = await axios.get(`http://127.0.0.1:8000/survey/students?projectID=${projectID}`);
-		students && setStudents(students);
-		console.log("Students", students);
+		setStudents(students);
 	};
 
+	React.useEffect(() => {
+		console.log("%cuseEffect gorups", "color:lime", groups)
+	}, [groups]);
 	//Called on initial mount
 	React.useEffect(() => {
 		getGroups();
 		getStudents();
 	}, []);
 
+	React.useEffect(() => {
+		if (isSettingGroups) {
+			GenerateGroups();
+		}
+	}, [userSurveys]);
+
 	return (
 		<div style={{ auto: "max-content" }}>
-			<h1>NOTE: the user data is still being worked on for this page</h1>
-			<h2>{subjectName} > Project: {projectName}</h2>
+			<h2>{subjectName} {'>'} Project: {projectName}</h2>
 			<button className={styles.btn} onClick={toggleShowStudents}
 				style={{ width: "max-content", height: "max-content", padding: "14px", marginTop: "30px" }}
 			>Show students eligible for groups</button>
@@ -148,7 +155,7 @@ const AdminManageGroups = (props) => {
 					<button className={styles.btn} disabled={!groups || groups.length == 0} onClick={toggleShowGroups}>View all groups</button>
 				</div>
 				<div className={styles.column}>
-					<button className={styles.btn} onClick={GenerateGroups}>Generate Groups</button>
+					<button className={styles.btn} disabled={students.length === 0} onClick={StartGenerateGroups}>Generate Groups</button>
 					<button className={styles.btn} >Generate Groups Randomly</button>
 				</div>
 			</div>

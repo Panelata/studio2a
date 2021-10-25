@@ -6,23 +6,23 @@ const StudentShowGroups = (props) => {
 
     console.log(props);
     const getGroups = async () => {
-		try {
-			// let { data } = await axios.get(`http://127.0.0.1:8000/groups/retrieve?projectID=${projectID}`);
+        try {
+            // let { data } = await axios.get(`http://127.0.0.1:8000/groups/retrieve?projectID=${projectID}`);
             let { data } = await axios.get(`http://127.0.0.1:8000/groups/retrieve?projectID=` + props.projectID);
-			let formattedGroups = FormatGroupResponse(data);
-			setGroups(formattedGroups);
-		} catch (error) {
-			console.log("Error in getGroups");
-			console.error(error);
-		}
-	};
+            let formattedGroups = FormatGroupResponse(data);
+            setGroups(formattedGroups);
+        } catch (error) {
+            console.log("Error in getGroups");
+            console.error(error);
+        }
+    };
 
-    	//Called on initial mount
-	React.useEffect(() => {
+    //Called on initial mount
+    React.useEffect(() => {
         console.log('hgere');
         console.log(props.projectID);
-		getGroups();
-	}, []);
+        getGroups();
+    }, []);
 
     return (
         <div className="groups" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>{
@@ -37,9 +37,9 @@ const StudentShowGroups = (props) => {
                         </div>
                     )}
                 </div>
-                )
-            }
-    </div>
+            )
+        }
+        </div>
     )
 }
 
