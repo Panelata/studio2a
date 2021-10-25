@@ -75,6 +75,10 @@ class Auth {
     return this.userType;
   }
 
+  getUserID() {
+    return this.userID;
+  }
+
   //Returns authenticated state
   isAuthenticated() {
     return this.authenticated;
