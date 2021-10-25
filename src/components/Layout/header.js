@@ -30,7 +30,6 @@ const logout = () => {
 const Header = () => {
 	const [authenticated, setAuthenticated] = React.useState(false);
 	const [userType, setUserType] = React.useState("");
-	const [userID, setUserID] = React.useState("");
 
 	React.useEffect(() => {
 		setAuthenticated(auth.isAuthenticated());
@@ -42,7 +41,6 @@ const Header = () => {
 			{authenticated ?
 				<>
 					You are logged in as a {userType} | <span style={{ cursor: "pointer" }} onClick={logout}>Logout</span>
-					Welcome, {}
 					{(userType === "student" && renderStudentHeader()) || (userType === "admin" && renderAdminHeader())}
 				</>
 				:
