@@ -4,7 +4,6 @@
  * @returns The groups in the for array of groups with an array of studens in each array
  */
 export default function (data) {
-	console.log("Groups:", data);
 	// This is going to be really slow but i got less than a day before demoing
 	// Basically the backend returns an array of student objects with a groupID parameter 
 	// I am then converting that into an array of groups with an array of students inside each group
@@ -24,6 +23,5 @@ export default function (data) {
 	});
 	let finalisedGroups = extractedGroups.map(Object.values);
 	finalisedGroups = finalisedGroups.map(group => group[0]);
-	console.log("Finalised Groups", finalisedGroups);
 	return finalisedGroups;
 }
