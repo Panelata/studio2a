@@ -1,6 +1,11 @@
 import React from "react";
 import "./createSubjectStyle.css";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 
 //create New Subject in DB
 function createSubjectDB(subjectDetails, cb) {
@@ -63,22 +68,31 @@ const CreateSubject = () => {
         }}
         className="card"
       >
-        <h2 style={{ margin: "30px" }}>Create Subject</h2>
-        <form
-          style={{ marginBottom: "20px" }}
-          onSubmit={(ev) => createSubject(ev)}
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          <label>Subject Name</label>
-          <input
-            required
-            type="text"
-            onChange={(ev) => setSubjectName(ev.target.value)}
-          />
-          <div></div>
-          <button type="submit" className="btn btn-primary btn-block btn-large">
-            Create Subject
-          </button>
-        </form>
+          <Grid container direction="column" alignItems="center" spacing={2}>
+            <Grid item xs={12}>
+              <Typography variant="h4">Create Subject</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                onChange={(ev) => setSubjectName(ev.target.value)}
+                label="Subject Name"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button onClick={(ev) => createSubject(ev)} variant="contained">
+                Register
+              </Button>
+            </Grid>
+          </Grid>
+        </CardContent>
         {message && <label>{message}</label>}
       </Card>
     </div>
