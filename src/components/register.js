@@ -1,7 +1,16 @@
 import React from "react";
 import auth from "./auth";
 import "./registerStyle.css";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 // TODO: style page and display error/confirmation messages
 
@@ -36,7 +45,6 @@ const Register = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        // alignItems: "center",
         height: "100vh",
       }}
     >
@@ -48,64 +56,75 @@ const Register = () => {
           paddingBottom: 5,
         }}
         className="card"
-
       >
-        <h2>Register User</h2>
-        <form onSubmit={(ev) => register(ev)}>
-          <label>First Name</label>
-          <input
-            className="registerInput"
-            required
-            type="text"
-            onChange={(ev) => setFirstName(ev.target.value)}
-          />
-
-          <label>Last Name</label>
-          <input
-            className="registerInput"
-            required
-            type="text"
-            onChange={(ev) => setLastName(ev.target.value)}
-          />
-
-          <label>Email</label>
-          <input
-            className="registerInput"
-            required
-            type="text"
-            onChange={(ev) => setEmail(ev.target.value)}
-          />
-
-          <label>Username</label>
-          <input
-            className="registerInput"
-            required
-            type="text"
-            onChange={(ev) => setUsername(ev.target.value)}
-          />
-
-          <label>Password</label>
-          <input
-            className="registerInput"
-            required
-            type="password"
-            onChange={(ev) => setPassword(ev.target.value)}
-          />
-
-          <div>
-            <label>User Type</label>
-          </div>
-          <div>
-            <select onChange={(ev) => setUserType(ev.target.value)}>
-              <option hidden>User Type</option>
-              <option value="student">Student</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-          <button type="submit" className="btn btn-primary btn-block btn-large">
-            Register
-          </button>
-        </form>
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Grid container direction="column" alignItems="center" spacing={2}>
+            <Grid item xs={12}>
+              <Typography variant="h4">Register User</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                onChange={(ev) => setFirstName(ev.target.value)}
+                label="First Name"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                onChange={(ev) => setLastName(ev.target.value)}
+                label="Last Name"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                onChange={(ev) => setEmail(ev.target.value)}
+                label="Email"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                onChange={(ev) => setUsername(ev.target.value)}
+                label="Username"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                onChange={(ev) => setPassword(ev.target.value)}
+                label="Password"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl fullWidth sx={{ minWidth: "100px" }}>
+                <InputLabel id="user-type-select-label">User Type</InputLabel>
+                <Select
+                  labelId="user-type-select-label"
+                  id="user-type-select"
+                  value={userType}
+                  label="User Type"
+                  onChange={(ev) => setUserType(ev.target.value)}
+                >
+                  <MenuItem value={"student"}>Student</MenuItem>
+                  <MenuItem value={"admin"}>Admin</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <Button onClick={(ev) => register(ev)} variant="contained">
+                Register
+              </Button>
+            </Grid>
+          </Grid>
+        </CardContent>
       </Card>
     </div>
   );
