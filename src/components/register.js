@@ -104,7 +104,7 @@ const Register = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControl fullWidth sx={{ minWidth: "100px" }}>
+              <FormControl fullWidth sx={{ minWidth: "120px" }}>
                 <InputLabel id="user-type-select-label">User Type</InputLabel>
                 <Select
                   labelId="user-type-select-label"
