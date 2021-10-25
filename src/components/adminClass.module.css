@@ -44,9 +44,9 @@ td, th {
 }
 
 .box1, .box2, .box3, .box4 {
-  background-color: rgb(197, 163, 131);
+  background-color: rgb(117, 181, 241);
   width: 200px;
-  height: 180px;
+  height: 80px;
   border-radius: 10px;
   padding: 40px;
   padding-top: 60px;
@@ -57,13 +57,13 @@ td, th {
 .box1 {
   position: absolute;
   top: 0px;
-  left: 0px;
+  left: -100px;
 }
 
 .box2 {
   position: absolute;
   top: 0px;
-  right: 0px;
+  right: -100px;
 }
 
 
