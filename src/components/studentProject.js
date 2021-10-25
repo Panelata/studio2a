@@ -12,7 +12,7 @@ class StudentProject extends Component {
 	render() {
 		return (
 			<div>
-				<h1>Viewing Project: {this.props.location.projectName}</h1>
+				<h1 stlye={{marginBottom:"20px"}}>Viewing Project: {this.props.location.projectName}</h1>
 				<div className={styles.options}>
 					<div className={styles.column}>
 						{/* TODO: flip disabled prop for enrolled group once backend is setup (should be disable if a group doesn't exist) */}

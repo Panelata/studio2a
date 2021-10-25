@@ -36,7 +36,7 @@ const Register = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        // alignItems: "center",
         height: "100vh",
       }}
     >
@@ -47,6 +47,8 @@ const Register = () => {
           paddingTop: 5,
           paddingBottom: 5,
         }}
+        className="card"
+
       >
         <h2>Register User</h2>
         <form onSubmit={(ev) => register(ev)}>

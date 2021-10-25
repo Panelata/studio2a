@@ -59,17 +59,18 @@ const AdminProject = (props) => {
       style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        // alignItems: "center",
         height: "100vh",
       }}
     >
       <Card
         sx={{
           width: "90vh",
-          height: "100vh",
+          height: "",
           paddingTop: 5,
           paddingBottom: 5,
         }}
+        className="card"
       >
         <div>
           <p className={styles.PageHeader}>{props.location.subjectName} > Create Project</p>

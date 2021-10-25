@@ -50,7 +50,7 @@ const CreateSubject = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        // alignItems: "center",
         height: "100vh",
       }}
     >
@@ -61,6 +61,7 @@ const CreateSubject = () => {
           paddingTop: 5,
           paddingBottom: 5,
         }}
+        className="card"
       >
         <h2 style={{ margin: "30px" }}>Create Subject</h2>
         <form

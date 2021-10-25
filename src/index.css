@@ -9,7 +9,7 @@ html {
   height: 100%;
   max-width: 100vw;
   overflow-x: hidden;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 
 body {
@@ -28,4 +28,11 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.card {
+  height: max-content !important;
+  margin-bottom:30px !important;
+  padding-bottom: 40px !important;
+  align-self: "start" !important;
 }

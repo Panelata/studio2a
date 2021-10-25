@@ -12,7 +12,7 @@ const AdminClass = (props) => {
       style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        // alignItems: "center",
         height: "100vh",
       }}
     >
@@ -23,6 +23,7 @@ const AdminClass = (props) => {
           paddingTop: 5,
           paddingBottom: 5,
         }}
+        className="card"
       >
         <div>
           <h2>Welcome To {subjectName}</h2>

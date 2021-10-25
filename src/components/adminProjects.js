@@ -30,7 +30,7 @@ class AdminProjects extends Component {
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
+          // alignItems: "center",
           height: "100vh",
         }}
       >
@@ -41,6 +41,7 @@ class AdminProjects extends Component {
             paddingTop: 5,
             paddingBottom: 5,
           }}
+          className="card"
         >
           <h2 style={{ marginBottom: "30px" }}>
             {" "}

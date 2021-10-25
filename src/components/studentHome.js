@@ -25,7 +25,7 @@ class StudentHome extends Component {
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
+          // alignItems: "center",
           height: "100vh",
         }}
       >
@@ -36,8 +36,10 @@ class StudentHome extends Component {
             paddingTop: 5,
             paddingBottom: 5,
           }}
+          className="card"
+
         >
-          <h1>Student Homepage </h1>
+          <h1 style={{ marginBottom: "20px" }}>Available Classes</h1>
           {(this.state.subjects.length > 0 && (
             <SubjectList subjects={this.state.subjects} />
           )) ||

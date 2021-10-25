@@ -91,7 +91,7 @@ const Header = () => {
       id="header"
       style={{
         width: "90vh",
-        paddingBottom: "40px",
+        // paddingBottom: "40px",
       }}
     >
       {authenticated && (

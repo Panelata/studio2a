@@ -74,7 +74,9 @@ const Login = (props) => {
         height: "100vh",
       }}
     >
-      <Card sx={{ width: 350, paddingTop: 5, paddingBottom: 5 }}>
+      <Card sx={{ width: 350, paddingTop: 5, paddingBottom: 5 }}
+        className="card"
+      >
         <CardContent>
           <Grid
             container
