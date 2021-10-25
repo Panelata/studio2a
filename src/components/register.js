@@ -21,6 +21,8 @@ const Register = () => {
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [userType, setUserType] = React.useState("");
+  const [modal, setModal] = React.useState(false);
+  const [shown, setShown] = React.useState(false);
 
   const register = (ev) => {
     ev.preventDefault();
@@ -30,103 +32,135 @@ const Register = () => {
         (success, msg) => {
           if (success) {
             console.log("USER CREATED");
+            setModal(true);
           } else {
             console.log("ERROR: " + msg);
+            document.getElementById("error").textContent = msg;
           }
         }
       );
     } else {
       console.log("Please select user type");
+      document.getElementById("error").textContent = "Please select user type.";
     }
   };
 
+  const toggleModal = () => {
+		setModal(!modal);
+	}
+
+    const toggleVisiblity = () => {
+		var id = document.getElementById("reveal")
+		if(shown)
+			id.textContent = "Reveal password"
+		else
+			id.textContent = "Hide password"
+		setShown(shown ? false : true);
+	}
+
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        height: "100vh",
-      }}
-    >
-      <Card
-        sx={{
-          width: "90vh",
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
           height: "100vh",
-          paddingTop: 5,
-          paddingBottom: 5,
         }}
-        className="card"
       >
-        <CardContent
+
+        {modal && (
+          <div className="modal">
+            <div onClick={toggleModal} className="overlay">
+                <div className="contents">
+                  <h1>User Created!</h1>
+                  <p>Click anywhere to close.</p>
+                </div>
+            </div>
+          </div>
+        )}
+
+        <Card
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            width: "90vh",
+            height: "100vh",
+            paddingTop: 5,
+            paddingBottom: 5,
           }}
+          className="card"
         >
-          <Grid container direction="column" alignItems="center" spacing={2}>
-            <Grid item xs={12}>
-              <Typography variant="h4">Register User</Typography>
+          <CardContent
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Grid container direction="column" alignItems="center" spacing={2}>
+              <Grid item xs={12}>
+                <Typography variant="h4">Register User</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  onChange={(ev) => setFirstName(ev.target.value)}
+                  label="First Name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  onChange={(ev) => setLastName(ev.target.value)}
+                  label="Last Name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  onChange={(ev) => setEmail(ev.target.value)}
+                  label="Email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  onChange={(ev) => setUsername(ev.target.value)}
+                  label="Username"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  onChange={(ev) => setPassword(ev.target.value)}
+                  label="Password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl fullWidth sx={{ minWidth: "120px" }}>
+                  <InputLabel id="user-type-select-label">User Type</InputLabel>
+                  <Select
+                    labelId="user-type-select-label"
+                    id="user-type-select"
+                    value={userType}
+                    label="User Type"
+                    onChange={(ev) => setUserType(ev.target.value)}
+                  >
+                    <MenuItem value={"student"}>Student</MenuItem>
+                    <MenuItem value={"admin"}>Admin</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <span id="error" className="error">
+                {" "}
+              </span>
+              <Grid item xs={12}>
+                <Button onClick={(ev) => register(ev)} variant="contained">
+                  Register
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                onChange={(ev) => setFirstName(ev.target.value)}
-                label="First Name"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                onChange={(ev) => setLastName(ev.target.value)}
-                label="Last Name"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                onChange={(ev) => setEmail(ev.target.value)}
-                label="Email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                onChange={(ev) => setUsername(ev.target.value)}
-                label="Username"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                onChange={(ev) => setPassword(ev.target.value)}
-                label="Password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl fullWidth sx={{ minWidth: "120px" }}>
-                <InputLabel id="user-type-select-label">User Type</InputLabel>
-                <Select
-                  labelId="user-type-select-label"
-                  id="user-type-select"
-                  value={userType}
-                  label="User Type"
-                  onChange={(ev) => setUserType(ev.target.value)}
-                >
-                  <MenuItem value={"student"}>Student</MenuItem>
-                  <MenuItem value={"admin"}>Admin</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <Button onClick={(ev) => register(ev)} variant="contained">
-                Register
-              </Button>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
-    </div>
+          </CardContent>
+        </Card>
+      </div>
   );
 };
 
