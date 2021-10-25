@@ -1,40 +1,73 @@
-import React, { Component } from 'react';
-import styles from "./adminHome.module.css";
+import React, { Component } from "react";
+// import styles from "./adminHome.module.css";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import SubjectList from "./SubjectList";
-
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
 
 class AdminHome extends Component {
+  state = {
+    subjects: [],
+    url: "http://127.0.0.1:8000/subject/retrieve",
+  };
+  getSubjects = async () => {
+    let subjects;
+    try {
+      let { data } = await axios.get(this.state.url);
+      subjects = data;
+    } catch {
+      subjects = [
+        { subjectID: 1, subjectName: "SES1a" },
+        { subjectID: 2, subjectName: "SES1b" },
+        { subjectID: 3, subjectName: "Data Structures" },
+        { subjectID: 4, subjectName: "Programming 1" },
+      ];
+    }
+    this.setState({ subjects });
+  };
 
-	state = {
-		subjects: [],
-		url: "http://127.0.0.1:8000/subject/retrieve"
-	}
-	getSubjects = async () => {
-		const subjects = await axios.get(this.state.url);
-		this.setState({ subjects: subjects.data });
-		console.log(subjects.data)
-	}
+  componentDidMount() {
+    this.getSubjects();
+  }
 
-	componentDidMount() {
-		this.getSubjects();
-	}
+  render() {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          // alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Card
+          sx={{
+            width: "90vh",
+            height: "100vh",
+            paddingTop: 5,
+            paddingBottom: 5,
+          }}
+          className="card"
+        >
+          <div>
+            <h1> Admin Homepage </h1>
+          </div>
+          <Button>Notifications</Button>
 
-	render() {
-		return (
-			<div>
-				<div>
-					<h1> Admin Homepage </h1>
-				</div>
-				<button type="button" className={styles.theButton}>Notifications </button>
-
-				{(this.state.subjects.length > 0 && <SubjectList subjects={this.state.subjects} />)
-					|| (this.state.subjects.length < 1 && <h4>No subjects currently exist, you can create subjects via the "Create a subject" page</h4>)}
-			</div>
-		)
-	}
-
+          {(this.state.subjects.length > 0 && (
+            <SubjectList subjects={this.state.subjects} />
+          )) ||
+            (this.state.subjects.length < 1 && (
+              <h4>
+                No subjects currently exist, you can create subjects via the
+                "Create a subject" page
+              </h4>
+            ))}
+        </Card>
+      </div>
+    );
+  }
 }
-
 
 export default AdminHome;

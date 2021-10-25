@@ -6,6 +6,8 @@ import axios from "axios";
 import FormatGroupResponse from '../Utils/FormatGroupResponse';
 import MergeSurveyResponses from '../Utils/MergeSurveyResponses';
 import ArrangeGroups from '../Utils/ArrangeGroups';
+import Card from "@mui/material/Card";
+
 
 
 function FormatGroupsData(rawClusters) {
@@ -145,58 +147,75 @@ const AdminManageGroups = (props) => {
 	}, [userSurveys]);
 
 	return (
-		<div style={{ auto: "max-content" }}>
-			<h2>{subjectName} {'>'} Project: {projectName}</h2>
-			<button className={styles.btn} onClick={toggleShowStudents}
-				style={{ width: "max-content", height: "max-content", padding: "14px", marginTop: "30px" }}
-			>Show students eligible for groups</button>
-			<div className={styles.options}>
-				<div className={styles.column}>
-					<button className={styles.btn} disabled={!groups || groups.length == 0} onClick={toggleShowGroups}>View all groups</button>
-				</div>
-				<div className={styles.column}>
-					<button className={styles.btn} disabled={students.length === 0} onClick={StartGenerateGroups}>Generate Groups</button>
-					<button className={styles.btn} >Generate Groups Randomly</button>
-				</div>
-			</div>
-			{showStudents && (
-				<Layer
-					onEsc={toggleShowStudents}
-					onClickOutside={toggleShowStudents}
-				>
-					<div
-						style={{ border: "1px solid black", borderRadius: "20px", display: "flex", flexDirection: "column", margin: "30px", padding: "20px", width: "600px", alignItems: "center" }}>
-						<div style={{ textDecoration: "underline", lineHeight: "40px" }}>Students who have completed the survey:</div>
-						{students.map(student => (
-							<div key={student.userID} style={{ display: "flex", flexDirection: "row", width: "100%" }}>
-								<div>{student.firstName} {student.lastName}</div>
-							</div>
-						))}
-						<button className={styles.btn}
-							style={{ width: "max-content", height: "max-content", padding: "14px", marginTop: "20px" }}
-							onClick={toggleShowStudents}
-						>
-							Close
-						</button>
+		<div
+			style={{
+				display: "flex",
+				justifyContent: "center",
+				// alignItems: "center",
+				height: "100vh",
+			}}
+		>
+			<Card
+				sx={{
+					width: "90vh",
+					height: "100vh",
+					paddingTop: 5,
+					paddingBottom: 5,
+				}}
+				className="card"
+			>
+				<h2>{subjectName} {'>'} Project: {projectName}</h2>
+				<button className={styles.btn} onClick={toggleShowStudents}
+					style={{ width: "max-content", height: "max-content", padding: "14px", marginTop: "30px" }}
+				>Show students eligible for groups</button>
+				<div className={styles.options}>
+					<div className={styles.column}>
+						<button className={styles.btn} disabled={!groups || groups.length == 0} onClick={toggleShowGroups}>View all groups</button>
 					</div>
-				</Layer>
-			)}
-			<div className="groups" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-				{showGroups &&
-					groups.map((group, i) =>
+					<div className={styles.column}>
+						<button className={styles.btn} disabled={students.length === 0} onClick={StartGenerateGroups}>Generate Groups</button>
+						<button className={styles.btn} >Generate Groups Randomly</button>
+					</div>
+				</div>
+				{showStudents && (
+					<Layer
+						onEsc={toggleShowStudents}
+						onClickOutside={toggleShowStudents}
+					>
 						<div
-							style={{ border: "1px solid black", display: "flex", flexDirection: "column", margin: "30px", padding: "20px", width: "600px", alignItems: "center" }}
-							key={i}>
-							<div style={{ textDecoration: "underline", fontWeight: "bold" }}>Group {i + 1}</div>
-							{group.map((student, index) =>
-								<div key={index} style={{ display: "flex", flexDirection: "row" }}>
+							style={{ border: "1px solid black", borderRadius: "20px", display: "flex", flexDirection: "column", margin: "30px", padding: "20px", width: "600px", alignItems: "center" }}>
+							<div style={{ textDecoration: "underline", lineHeight: "40px" }}>Students who have completed the survey:</div>
+							{students.map(student => (
+								<div key={student.userID} style={{ display: "flex", flexDirection: "row", width: "100%" }}>
 									<div>{student.firstName} {student.lastName}</div>
 								</div>
-							)}
+							))}
+							<button className={styles.btn}
+								style={{ width: "max-content", height: "max-content", padding: "14px", marginTop: "20px" }}
+								onClick={toggleShowStudents}
+							>
+								Close
+							</button>
 						</div>
-					)
-				}
-			</div>
+					</Layer>
+				)}
+				<div className="groups" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+					{showGroups &&
+						groups.map((group, i) =>
+							<div
+								style={{ border: "1px solid black", display: "flex", flexDirection: "column", margin: "30px", padding: "20px", width: "600px", alignItems: "center" }}
+								key={i}>
+								<div style={{ textDecoration: "underline", fontWeight: "bold" }}>Group {i + 1}</div>
+								{group.map((student, index) =>
+									<div key={index} style={{ display: "flex", flexDirection: "row" }}>
+										<div>{student.firstName} {student.lastName}</div>
+									</div>
+								)}
+							</div>
+						)
+					}
+				</div>
+			</Card>
 		</div>
 	)
 }

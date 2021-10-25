@@ -1,5 +1,5 @@
-import './App.css';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import "./App.css";
+import { Route, Redirect, Switch } from "react-router-dom";
 
 import Login from './components/Login/login';
 import AdminHome from './components/adminHome';
@@ -20,7 +20,7 @@ import React from 'react';
 
 function App() {
   const [authenticated, setAuthenticated] = React.useState(false);
-  const [userType, setUserType] = React.useState('');
+  const [userType, setUserType] = React.useState("");
 
   React.useEffect(() => {
     setAuthenticated(auth.isAuthenticated());
@@ -29,12 +29,19 @@ function App() {
   const checkLogin = () => {
     setAuthenticated(auth.isAuthenticated());
     setUserType(auth.getUserType());
-  }
+  };
 
   return (
-    <div className="App">
-      {authenticated ?
-        (userType === "student" &&
+    <div
+      className="App"
+      style={{
+        display: "flex",
+        direction: "column",
+        alignItems: "center",
+      }}
+    >
+      {authenticated ? (
+        (userType === "student" && (
           <Switch>
             {/* Declare Student routes here */}
             <RouteWrapper path='/join-task' component={StudentEntry} layout={Layout} />
@@ -43,11 +50,11 @@ function App() {
             <RouteWrapper path='/student/class/project' exact component={StudentProject} layout={Layout} />
             <RouteWrapper path='/student/class/project/completeSurvey' exact component={StudentCompleteSurvey} layout={Layout} />
             {/* If the route doesn't exist, default to /home */}
-            <Redirect to='/student-home' />
+            <Redirect to="/student-home" />
           </Switch>
-        ) ||
-        (userType === "admin" &&
-          <Switch >
+        )) ||
+        (userType === "admin" && (
+          <Switch>
             {/* Declare Admin routes here */}
             <RouteWrapper path='/admin-home' exact component={AdminHome} layout={Layout} />
             <RouteWrapper path='/admin/register' exact component={Register} layout={Layout} />
@@ -57,30 +64,34 @@ function App() {
             <RouteWrapper path='/admin/class/projects' component={AdminProjects} layout={Layout} />
             <RouteWrapper path='/admin/class' component={AdminClass} layout={Layout} />
             {/* If the route doesn't exist, default to /home */}
-            <Redirect to='/admin-home' />
+            <Redirect to="/admin-home" />
           </Switch>
-        )
-        :
+        ))
+      ) : (
         <Switch>
-          <RouteWrapper path='/login' exact component={() => <Login checkLogin={checkLogin} />} layout={Layout} />
-          <Redirect to='/login' />
+          <RouteWrapper
+            path="/login"
+            exact
+            component={() => <Login checkLogin={checkLogin} />}
+            layout={Layout}
+          />
+          <Redirect to="/login" />
         </Switch>
-      }
+      )}
     </div>
   );
 }
 
-function RouteWrapper({
-  component: Component,
-  layout: Layout,
-  ...rest
-}) {
+function RouteWrapper({ component: Component, layout: Layout, ...rest }) {
   return (
-    <Route {...rest} render={(props) =>
-      <Layout {...props}>
-        <Component {...props} />
-      </Layout>
-    } />
+    <Route
+      {...rest}
+      render={(props) => (
+        <Layout {...props}>
+          <Component {...props} />
+        </Layout>
+      )}
+    />
   );
 }
 
