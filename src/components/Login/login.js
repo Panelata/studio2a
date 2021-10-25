@@ -65,32 +65,6 @@ const Login = (props) => {
     setShown(shown ? false : true);
   };
 
-<<<<<<< HEAD
-	const toggleVisiblity = () => {
-		var id = document.getElementById("reveal")
-		if(shown)
-			id.textContent = "Reveal password"
-		else
-			id.textContent = "Hide password"
-		setShown(shown ? false : true);
-	}
-
-	return (
-		<div className='login'>
-			<h1 > Login </h1>
-			<form onSubmit={(ev)=>login(ev)}>
-				<label>Username</label>
-				<input required type="text" onChange={(ev)=>{setUsername(ev.target.value); document.getElementById("error").textContent=""}} />
-				<label>Password</label>
-				<input required type={shown ? "text" : "password"} onChange={(ev)=>{setPassword(ev.target.value); document.getElementById("error").textContent=""}} />
-				<label><input type="checkbox" onChange={()=>setKeepSignin(!keepSignin)} /> Keep me signed in</label>
-				<div class="inner"> <i id="reveal" role="button" onClick={toggleVisiblity} title={shown ? "Hide password" : "Reveal password"}> Reveal password </i> </div>
-				<span id="error" className="error"> </span>
-				<button type="submit" className="btn btn-primary btn-block btn-large">Log In</button>
-			</form>
-		</div>
-	)
-=======
   return (
     <div
       style={{
@@ -195,6 +169,5 @@ const Login = (props) => {
     </div>
   );
 };
->>>>>>> develop
 
 export default Login;
