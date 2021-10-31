@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 
 const AdminClass = (props) => {
   const { subjectName } = props.location;
-  console.log(props.location.subjectID);
+  // console.log(props.location.subjectID);
 
   return (
     <div

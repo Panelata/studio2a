@@ -21,7 +21,7 @@ export default function (clusteredGroups) {
 			incrementPosition();
 		}
 	};
-	console.log("Final groups", finalGroups)
+	console.log("%cFinal groups", "color:yellow", finalGroups)
 
 	return finalGroups;
 };

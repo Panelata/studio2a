@@ -13,6 +13,6 @@ export default async function (data) {
 			};
 		});
 	});
-	console.log("mergedData", mergedData)
+	console.log("%cSurvey Response Data", "color:purple", mergedData)
 	return mergedData;
 };
