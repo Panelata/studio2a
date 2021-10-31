@@ -74,7 +74,6 @@ const AdminManageGroups = (props) => {
 	const StartGenerateGroups = async () => {
 		if (isSettingGroups) return "";
 		setIsSettingGroups(true);
-		setGroupType("kmeans")
 		setUserSurveys(await GetSurveyResults(projectID))
 
 	}
@@ -202,9 +201,11 @@ const AdminManageGroups = (props) => {
 
 	React.useEffect(() => {
 		if (isSettingGroups) {
-			if (groupType == "kmeans") GenerateGroups()
+			// if (groupType == "kmeans") 
+			console.log("Generating the groups!")
+			GenerateGroups()
 
-			if (groupType == "random") generateRandomGroups()
+			// if (groupType == "random") generateRandomGroups()
 		}
 	}, [userSurveys]);
 
@@ -236,7 +237,7 @@ const AdminManageGroups = (props) => {
 					</div>
 					<div className={styles.column}>
 						<button className={styles.btn} disabled={students.length === 0} onClick={StartGenerateGroups}>Generate Groups</button>
-						<button className={styles.btn} onClick={StartGenerateGroups}>Generate Groups Randomly</button>
+						<button className={styles.btn} disabled={students.length === 0} onClick={StartGenerateGroups}>Generate Groups Randomly</button>
 					</div>
 				</div>
 				{showStudents && (

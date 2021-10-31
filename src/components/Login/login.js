@@ -56,7 +56,7 @@ const Login = (props) => {
       } else {
         console.log("Unsuccessful");
         document.getElementById("error").textContent =
-          "Inncorrect username or password.";
+          "Incorrect username or password.";
       }
     });
   };
