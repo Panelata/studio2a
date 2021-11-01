@@ -21,6 +21,7 @@ const Register = () => {
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [userType, setUserType] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
   const register = (ev) => {
     ev.preventDefault();
@@ -30,13 +31,15 @@ const Register = () => {
         (success, msg) => {
           if (success) {
             console.log("USER CREATED");
+            setMessage(`An account for ${firstName} ${lastName} has been created!`);
           } else {
             console.log("ERROR: " + msg);
+            setMessage(msg);
           }
         }
       );
     } else {
-      console.log("Please select user type");
+      setMessage("Please select a user type");
     }
   };
 
@@ -99,6 +102,7 @@ const Register = () => {
             <Grid item xs={12}>
               <TextField
                 required
+                type="password"
                 onChange={(ev) => setPassword(ev.target.value)}
                 label="Password"
               />
@@ -123,6 +127,7 @@ const Register = () => {
                 Register
               </Button>
             </Grid>
+            <span>{message}</span>
           </Grid>
         </CardContent>
       </Card>

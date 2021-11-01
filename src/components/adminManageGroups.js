@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from "./adminManageGroups.module.css";
 import kmeans from "node-kmeans";
-import { Layer } from "grommet";
+import { generate, Layer } from "grommet";
 import axios from "axios";
 import FormatGroupResponse from '../Utils/FormatGroupResponse';
 import MergeSurveyResponses from '../Utils/MergeSurveyResponses';
@@ -10,24 +10,23 @@ import Card from "@mui/material/Card";
 
 
 
-function FormatGroupsData(rawClusters) {
+function FormatGroupsData(rawClusters, userSurveys) {
 	// let dataGroups = rawClusters.map(cluster =>
 	// 	cluster.clusterInd.map(index => userSurveys[index])
 	// );
-	// console.log("Raw clusters", rawClusters)
+	console.log("%cRaw Clusters Data", "color:red", rawClusters)
 	let dataGroups = Array.apply(null, Array(rawClusters.length)).map(function () { return [] });
 	for (let i = 0; i < rawClusters.length; i++) {
 		let clusterIndex = rawClusters[i].clusterInd;
 		// console.log("cluster index", clusterIndex);
 		for (let u = 0; u < clusterIndex.length; u++) {
 			// console.log("Student in cluster:", userSurveys[clusterIndex[u]]);
-			dataGroups[i].push(clusterIndex[u]);
+			dataGroups[i].push(userSurveys[clusterIndex[u]].userID);
 		}
 		// .forEach(student => { dataGroups[i].push(userSurveys[student]) });
 	};
 	dataGroups.sort(function (a, b) { return b.length - a.length });
-	console.log(rawClusters)
-	console.log("datagroups", dataGroups)
+	console.log("%cFiltered clusters", "color:orange", dataGroups)
 	return dataGroups;
 }
 
@@ -70,11 +69,13 @@ const AdminManageGroups = (props) => {
 	const [showStudents, setShowStudents] = useState(false);
 	const [userSurveys, setUserSurveys] = useState([]);
 	const { subjectName, projectID, projectName, projectSize } = props.location;
+	const [groupType, setGroupType] = useState("");
 
 	const StartGenerateGroups = async () => {
 		if (isSettingGroups) return "";
 		setIsSettingGroups(true);
 		setUserSurveys(await GetSurveyResults(projectID))
+
 	}
 
 	const GenerateGroups = () => {
@@ -103,6 +104,64 @@ const AdminManageGroups = (props) => {
 		setIsSettingGroups(false);
 	}
 
+	// randomize array order
+	const shuffle = (array) => {
+		let currentIndex = array.length, temporaryValue, randomIndex;
+		while (0 !== currentIndex) {
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
+		return array;
+	}
+
+	// split array into groups
+	/**
+	 * @param {int[]} array - Array of userIDs
+	 * @param {int} numStudents - Number of students in the project
+	 * @returns {int[][]} - Array of arrays of userIDs
+	 */
+	const splitArray = (array, numStudents) => {
+		let numGroups = numStudents / projectSize;
+		let remainder = numStudents % projectSize;
+		let baseNumGroups = numStudents / projectSize;
+		let groups = Array.apply(null, Array(numGroups)).map(function () { return [] });
+		let groupIndex = 0;
+		for (let i = 0; i < array.length; i++) {
+			if (remainder == 0) {
+				groups[groupIndex].push(array[i]);
+				groupIndex++;
+			} else {
+				if (groupIndex < baseNumGroups) {
+					groups[groupIndex].push(array[i]);
+					groupIndex++;
+				} else {
+					groups[groupIndex].push(array[i]);
+					groupIndex = 0;
+				}
+			}
+		}
+		return groups;
+	}
+
+	const startGenerateRandomGroups = async () => {
+		if (isSettingGroups) return "";
+		setGroupType("random")
+		setIsSettingGroups(true);
+		setUserSurveys(await GetSurveyResults(projectID))
+	}
+
+	const generateRandomGroups = () => {
+		let shuffledStudents = shuffle(students);
+		let idGroups = splitArray(shuffledStudents, students.length);
+		SaveGroups({ projectID, groups: idGroups });
+		console.log("id groups", idGroups);
+		setIsSettingGroups(false);
+	}
+
+
 	const toggleShowGroups = () => {
 		setShowGroups(!showGroups);
 	}
@@ -110,7 +169,6 @@ const AdminManageGroups = (props) => {
 	const toggleShowStudents = () => {
 		setShowStudents(!showStudents);
 	}
-
 
 	/**
 	 * Returns the groups from the php endpoint in an array of objects. On the frontend we are then converting that to a groups array of users arrays
@@ -132,17 +190,22 @@ const AdminManageGroups = (props) => {
 	};
 
 	React.useEffect(() => {
-		console.log("%cuseEffect gorups", "color:lime", groups)
+		// console.log("%cuseEffect gorups", "color:lime", groups)
 	}, [groups]);
 	//Called on initial mount
 	React.useEffect(() => {
 		getGroups();
 		getStudents();
+		console.log("%cGroup size: ", "color:lime", projectSize);
 	}, []);
 
 	React.useEffect(() => {
 		if (isSettingGroups) {
-			GenerateGroups();
+			// if (groupType == "kmeans") 
+			console.log("Generating the groups!")
+			GenerateGroups()
+
+			// if (groupType == "random") generateRandomGroups()
 		}
 	}, [userSurveys]);
 
@@ -174,7 +237,7 @@ const AdminManageGroups = (props) => {
 					</div>
 					<div className={styles.column}>
 						<button className={styles.btn} disabled={students.length === 0} onClick={StartGenerateGroups}>Generate Groups</button>
-						<button className={styles.btn} >Generate Groups Randomly</button>
+						<button className={styles.btn} disabled={students.length === 0} onClick={StartGenerateGroups}>Generate Groups Randomly</button>
 					</div>
 				</div>
 				{showStudents && (

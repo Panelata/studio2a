@@ -4,7 +4,7 @@ import FormatGroupResponse from '../Utils/FormatGroupResponse';
 const StudentShowGroups = (props) => {
     const [groups, setGroups] = useState([]);
 
-    console.log(props);
+    // console.log(props);
     const getGroups = async () => {
         try {
             // let { data } = await axios.get(`http://127.0.0.1:8000/groups/retrieve?projectID=${projectID}`);
@@ -19,8 +19,7 @@ const StudentShowGroups = (props) => {
 
     //Called on initial mount
     React.useEffect(() => {
-        console.log('hgere');
-        console.log(props.projectID);
+        // console.log(props.projectID);
         getGroups();
     }, []);
 

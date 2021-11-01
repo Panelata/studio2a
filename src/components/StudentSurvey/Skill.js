@@ -41,7 +41,7 @@ class Skill extends Component {
             }
         });
 
-		alert('A score of' + this.state.value + 'was submitted');
+		alert('A score of ' + this.state.value + ' was submitted');
 		event.preventDefault();
 
 	  }

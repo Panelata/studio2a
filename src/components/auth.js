@@ -7,6 +7,7 @@ class Auth {
   constructor() {
     this.authenticated = false;
     this.userType = "";
+    this.userID = 0;
   }
 
   //Handles Login
@@ -25,6 +26,7 @@ class Auth {
         if (data.success) {
           this.authenticated = true;
           this.userType = data.userType;
+          this.userID = data.userID;
           sessionStorage.setItem("sessionToken", data.token);
           if (login[2]) {
             localStorage.setItem("token", data.token);
